@@ -16,16 +16,17 @@ export async function POST(req: Request) {
       );
     }
 
-    const apiKey = process.env.HF_API_KEY;
+    const apiKey = process.env.HF_API_TOKEN || process.env.HF_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { error: "Server misconfiguration: HF_API_KEY is not set" },
+        { error: "Server misconfiguration: HF_API_TOKEN/HF_API_KEY is not set" },
         { status: 500 }
       );
     }
 
     // You can change the model to any suitable text-generation model you prefer
-    const modelUrl = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
+    // Using a seq2seq text-to-text model as requested
+    const modelUrl = "https://api-inference.huggingface.co/models/google/flan-t5-base";
 
     const upstream = await fetch(modelUrl, {
       method: "POST",
