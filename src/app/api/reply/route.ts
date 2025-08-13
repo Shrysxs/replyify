@@ -30,12 +30,23 @@ function buildPrompt({
 }) {
   const parts: string[] = [];
   if (typeof system === "string" && system.trim()) {
-    parts.push(`System:\n${system.trim()}`);
+    parts.push(system.trim());
+  } else {
+    parts.push(
+      "You are a helpful assistant. Use the provided context when available. Output only the answer, no role tags. Be concise and relevant."
+    );
   }
   if (typeof context === "string" && context.trim()) {
-    parts.push(`Context:\n${context.trim()}`);
+    parts.push(
+      `Context (authoritative, use this to answer):\n${context.trim()}`
+    );
+    parts.push(
+      `Task:\n${prompt}\n\nConstraints:\n- Base your answer strictly on the context above.\n- If the context lacks the information, say you don't know.\n- No preambles; just the answer.`
+    );
+  } else {
+    // No context supplied; still answer succinctly
+    parts.push(prompt);
   }
-  parts.push(`User:\n${prompt}`);
   return parts.join("\n\n");
 }
 

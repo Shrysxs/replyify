@@ -1,60 +1,28 @@
 "use client";
-import { useState } from "react";
+import * as React from "react";
+import PromptConfigurator from "@/components/prompt/PromptConfigurator";
+import type { PromptConfig } from "@/config/promptOptions";
 
 export default function Home() {
-  const [prompt, setPrompt] = useState("");
-  const [result, setResult] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleGenerate() {
-    try {
-      setLoading(true);
-      setError(null);
-      setResult("");
-      const res = await fetch("/api/reply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || `Request failed: ${res.status}`);
-      }
-      const data = await res.json();
-      setResult(typeof data?.text === "string" && data.text.trim() ? data.text : "No response");
-    } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : "Something went wrong";
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const [config, setConfig] = React.useState<PromptConfig>({
+    persona: "",
+    tone: "",
+    goal: "",
+    topic: "",
+    input: "",
+  });
 
   return (
-    <div className="min-h-screen p-8 flex flex-col gap-6 items-center">
-      <h1 className="text-3xl font-semibold">Replyify</h1>
-
-      <textarea
-        className="w-full max-w-2xl h-48 p-3 border rounded-md bg-transparent"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter your message"
-      />
-
-      <button
-        className="px-4 py-2 rounded-md bg-black text-white disabled:opacity-50"
-        onClick={handleGenerate}
-        disabled={loading || !prompt.trim()}
-      >
-        {loading ? "Generating..." : "Generate"}
-      </button>
-
-      {error && (
-        <p className="text-red-500 text-sm max-w-2xl break-words">{error}</p>
-      )}
-
-      <p className="max-w-2xl whitespace-pre-wrap">{result}</p>
-    </div>
+    <main className="mx-auto max-w-3xl p-6 space-y-6">
+      <h1 className="text-2xl font-semibold">Replyify — Prompt Configurator</h1>
+      <p className="opacity-70 text-sm">
+        Select persona, tone, goal, and topic; then paste the message. Step 2 will wire this to the LLM.
+      </p>
+      <PromptConfigurator onChange={setConfig} />
+      <div className="rounded-xl border border-white/10 p-4">
+        <div className="text-xs uppercase opacity-75 mb-2">Live Config (dev)</div>
+        <pre className="text-xs overflow-auto">{JSON.stringify(config, null, 2)}</pre>
+      </div>
+    </main>
   );
 }

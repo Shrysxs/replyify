@@ -13,6 +13,13 @@ type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
 type ChatChoice = { index?: number; message?: ChatMessage; finish_reason?: string };
 type ChatCompletion = { id?: string; object?: string; created?: number; model?: string; choices?: ChatChoice[] };
 
+// Tunables via env
+const TIMEOUT_MS = Number(process.env.HF_TIMEOUT_MS || 120_000);
+const MAX_NEW_TOKENS = Number(process.env.HF_MAX_NEW_TOKENS || 200);
+const MAX_TOKENS = Number(process.env.HF_MAX_TOKENS || 200); // for router
+const TEMPERATURE = Number(process.env.HF_TEMPERATURE || 0.7);
+const STOP_SEQS = (process.env.HF_STOP || "").split(",").map((s) => s.trim()).filter(Boolean);
+
 export async function generateText(prompt: string): Promise<string> {
   if (!HF_API_KEY) {
     throw new Error("HF_API_KEY/HF_API_TOKEN is not set in environment");
@@ -26,6 +33,9 @@ export async function generateText(prompt: string): Promise<string> {
           model,
           messages: [{ role: "user", content: prompt }] as ChatMessage[],
           stream: false,
+          max_tokens: MAX_TOKENS,
+          temperature: TEMPERATURE,
+          ...(STOP_SEQS.length ? { stop: STOP_SEQS } : {}),
         };
         return axios.post(
           "https://router.huggingface.co/v1/chat/completions",
@@ -35,7 +45,7 @@ export async function generateText(prompt: string): Promise<string> {
               Authorization: `Bearer ${HF_API_KEY}`,
               "Content-Type": "application/json",
             },
-            timeout: 60_000,
+            timeout: TIMEOUT_MS,
           }
         );
       }
@@ -45,8 +55,8 @@ export async function generateText(prompt: string): Promise<string> {
         {
           inputs: prompt,
           parameters: {
-            max_new_tokens: 200,
-            temperature: 0.7,
+            max_new_tokens: MAX_NEW_TOKENS,
+            temperature: TEMPERATURE,
             return_full_text: false,
           },
           options: {
@@ -59,7 +69,7 @@ export async function generateText(prompt: string): Promise<string> {
             Authorization: `Bearer ${HF_API_KEY}`,
             "Content-Type": "application/json",
           },
-          timeout: 60_000,
+          timeout: TIMEOUT_MS,
         }
       );
     };
@@ -77,7 +87,6 @@ export async function generateText(prompt: string): Promise<string> {
         if (process.env.NODE_ENV !== "production") {
           try {
             const preview = typeof data === "string" ? data.slice(0, 200) : JSON.stringify(data).slice(0, 200);
-            // eslint-disable-next-line no-console
             console.debug("HF raw response preview:", preview);
           } catch {}
         }
@@ -127,6 +136,7 @@ export async function generateText(prompt: string): Promise<string> {
         lastErr = e;
         const ax = e as AxiosError;
         const status = ax.response?.status ?? 0;
+        const code = (ax as AxiosError & { code?: string }).code ?? "";
         const body = ax.response?.data;
         // If 404/403, try fallback model if provided
         if ((status === 404 || status === 403) && process.env.HF_FALLBACK_MODEL) {
@@ -173,14 +183,13 @@ export async function generateText(prompt: string): Promise<string> {
           }
           break; // don't retry more on 404/403 after fallback attempt
         }
-        // Retry on transient statuses
-        if ([429, 500, 502, 503, 504].includes(status) && attempt < maxAttempts - 1) {
+        // Retry on transient statuses or timeouts
+        if (([429, 500, 502, 503, 504].includes(status) || code === "ECONNABORTED") && attempt < maxAttempts - 1) {
           await backoff(attempt);
           continue;
         }
         // Non-retriable or exhausted
         const detailStr = typeof body === "string" ? body : JSON.stringify(body);
-        // eslint-disable-next-line no-console
         console.error("HF API error detail:", status, detailStr || ax.message);
         throw new Error(`HF API error (${status}): ${detailStr || ax.message}`);
       }
@@ -188,8 +197,8 @@ export async function generateText(prompt: string): Promise<string> {
     throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
 
   } catch (error: unknown) {
-    const err = error as any;
-    const detail = err?.response?.data || err?.message || err;
+    const err = error as { response?: { data?: unknown }; message?: string } | unknown;
+    const detail = (err as { response?: { data?: unknown } })?.response?.data || (err as { message?: string })?.message || err;
     const detailStr = typeof detail === "string" ? detail : JSON.stringify(detail);
     throw new Error(`HF API error: ${detailStr}`);
   }
