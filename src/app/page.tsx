@@ -12,7 +12,7 @@ export default function Home() {
       setLoading(true);
       setError(null);
       setResult("");
-      const res = await fetch("/api/generate", {
+      const res = await fetch("/api/reply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
@@ -22,7 +22,7 @@ export default function Home() {
         throw new Error(text || `Request failed: ${res.status}`);
       }
       const data = await res.json();
-      setResult(data?.[0]?.generated_text || "No response");
+      setResult(typeof data?.text === "string" && data.text.trim() ? data.text : "No response");
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : "Something went wrong";
       setError(message);
