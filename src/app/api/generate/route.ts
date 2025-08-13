@@ -1,9 +1,10 @@
+import "dotenv/config";
 import { NextResponse } from "next/server";
+import { generateText } from "../../../lib/hf";
 
-// Server-only API route to generate text using an external provider
-// IMPORTANT: Put your API key in an environment variable, e.g., HF_API_KEY, and NEVER expose it on the client.
-// Example below uses Hugging Face Inference API which returns data like: [{ generated_text: "..." }]
-// Create .env.local with: HF_API_KEY=your_hf_api_key
+// Ensure Node runtime and avoid caching.
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
@@ -15,51 +16,20 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-
-    const apiKey = process.env.HF_API_TOKEN || process.env.HF_API_KEY;
-    if (!apiKey) {
+    const text = await generateText(prompt);
+    if (!text) {
       return NextResponse.json(
-        { error: "Server misconfiguration: HF_API_TOKEN/HF_API_KEY is not set" },
-        { status: 500 }
+        { error: "Generation failed or empty response" },
+        { status: 502 }
       );
     }
-
-    // You can change the model to any suitable text-generation model you prefer
-    // Using a seq2seq text-to-text model as requested
-    const modelUrl = "https://api-inference.huggingface.co/models/google/flan-t5-base";
-
-    const upstream = await fetch(modelUrl, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        inputs: prompt,
-        parameters: {
-          max_new_tokens: 200,
-          temperature: 0.7,
-          return_full_text: false,
-        },
-      }),
-    });
-
-    if (!upstream.ok) {
-      const errText = await upstream.text();
-      return NextResponse.json(
-        { error: "Upstream provider error", details: errText },
-        { status: upstream.status }
-      );
-    }
-
-    // The HF Inference API for text-generation returns: Array<{ generated_text: string }>
-    const data = await upstream.json();
-
-    return NextResponse.json(data);
+    return NextResponse.json([{ generated_text: text }]);
   } catch (err) {
+    const isProd = process.env.NODE_ENV === "production";
+    const message = err instanceof Error ? err.message : String(err);
     console.error("/api/generate error:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: isProd ? "Internal server error" : message },
       { status: 500 }
     );
   }

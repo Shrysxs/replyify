@@ -23,8 +23,9 @@ export default function Home() {
       }
       const data = await res.json();
       setResult(data?.[0]?.generated_text || "No response");
-    } catch (e: any) {
-      setError(e?.message || "Something went wrong");
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Something went wrong";
+      setError(message);
     } finally {
       setLoading(false);
     }
