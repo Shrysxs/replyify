@@ -1,6 +1,6 @@
-import "dotenv/config";
 import { NextResponse } from "next/server";
-import { generateText } from "../../../lib/groq";
+import { generateReply } from "@/lib/llm";
+import { apiCache, stableKey } from "@/lib/cache";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,37 +19,6 @@ export async function OPTIONS() {
   return withCors(new NextResponse(null, { status: 204 }));
 }
 
-function buildPrompt({
-  system,
-  context,
-  prompt,
-}: {
-  system?: string;
-  context?: string;
-  prompt: string;
-}) {
-  const parts: string[] = [];
-  if (typeof system === "string" && system.trim()) {
-    parts.push(system.trim());
-  } else {
-    parts.push(
-      "You are a helpful assistant. Use the provided context when available. Output only the answer, no role tags. Be concise and relevant."
-    );
-  }
-  if (typeof context === "string" && context.trim()) {
-    parts.push(
-      `Context (authoritative, use this to answer):\n${context.trim()}`
-    );
-    parts.push(
-      `Task:\n${prompt}\n\nConstraints:\n- Base your answer strictly on the context above.\n- If the context lacks the information, say you don't know.\n- No preambles; just the answer.`
-    );
-  } else {
-    // No context supplied; still answer succinctly
-    parts.push(prompt);
-  }
-  return parts.join("\n\n");
-}
-
 export async function POST(req: Request) {
   try {
     const contentType = req.headers.get("content-type") || "";
@@ -60,16 +29,36 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { prompt, context, system } = body ?? {};
+    const { prompt, context, system, model, temperature, maxTokens, stop } = body ?? {};
 
-    if (!prompt || typeof prompt !== "string") {
+    const toStr = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+    const input = toStr(prompt);
+
+    if (!input) {
       return withCors(
         NextResponse.json({ error: "Missing or invalid 'prompt'" }, { status: 400 })
       );
     }
 
-    const composed = buildPrompt({ system, context, prompt });
-    const text = await generateText(composed);
+    const cacheKey = stableKey({
+      route: "/api/reply",
+      prompt: input,
+      context: toStr(context),
+      system: toStr(system),
+      model: toStr(model),
+      temperature,
+      maxTokens,
+      stop,
+    });
+
+    const cached = apiCache.get(cacheKey);
+    if (cached) {
+      return withCors(NextResponse.json({ text: cached, cached: true }, { status: 200 }));
+    }
+
+    const text = await generateReply({ input, context: toStr(context), system: toStr(system), model: toStr(model), temperature, maxTokens, stop });
+
+    if (text) apiCache.set(cacheKey, text);
 
     if (!text) {
       return withCors(
@@ -77,8 +66,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const model = process.env.GROQ_MODEL?.trim() || "meta-llama/llama-4-scout-17b-16e-instruct";
-    return withCors(NextResponse.json({ text, model }, { status: 200 }));
+    const envModel = process.env.GROQ_MODEL?.trim() || "meta-llama/llama-4-scout-17b-16e-instruct";
+    return withCors(NextResponse.json({ text, model: envModel }, { status: 200 }));
   } catch (err) {
     const isProd = process.env.NODE_ENV === "production";
     const message = err instanceof Error ? err.message : String(err);

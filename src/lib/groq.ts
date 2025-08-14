@@ -1,10 +1,11 @@
 import axios, { AxiosError } from "axios";
+import https from "https";
 
 // Server-side helper to call Groq's OpenAI-compatible Chat Completions API
 // Ensure GROQ_API_KEY is set in your environment (never expose it on the client)
 const GROQ_API_KEY = process.env.GROQ_API_KEY || process.env.GROQ_KEY;
 
-const MODEL =
+const DEFAULT_MODEL =
   (process.env.GROQ_MODEL && process.env.GROQ_MODEL.trim()) ||
   "meta-llama/llama-4-scout-17b-16e-instruct";
 
@@ -17,21 +18,38 @@ const STOP_SEQS = (process.env.GROQ_STOP || "")
   .map((s) => s.trim())
   .filter(Boolean);
 
-export async function generateText(prompt: string): Promise<string> {
+export type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
+
+export async function chatComplete({
+  messages,
+  model,
+  temperature,
+  maxTokens,
+  stop,
+}: {
+  messages: ChatMessage[];
+  model?: string;
+  temperature?: number;
+  maxTokens?: number;
+  stop?: string[];
+}): Promise<string> {
   if (!GROQ_API_KEY) {
     throw new Error("GROQ_API_KEY is not set in environment");
   }
 
   const payload = {
-    model: MODEL,
-    messages: [{ role: "user", content: prompt }],
-    temperature: TEMPERATURE,
-    max_tokens: MAX_TOKENS,
+    model: (model && model.trim()) || DEFAULT_MODEL,
+    messages,
+    temperature: typeof temperature === "number" ? temperature : TEMPERATURE,
+    max_tokens: typeof maxTokens === "number" ? maxTokens : MAX_TOKENS,
     stream: false,
-    ...(STOP_SEQS.length ? { stop: STOP_SEQS } : {}),
+    ...(((stop && stop.length ? stop : STOP_SEQS).length)
+      ? { stop: (stop && stop.length ? stop : STOP_SEQS) }
+      : {}),
   };
 
   try {
+    const httpsAgent = new https.Agent({ keepAlive: true, keepAliveMsecs: 1000, maxSockets: 50 });
     const resp = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       payload,
@@ -41,6 +59,7 @@ export async function generateText(prompt: string): Promise<string> {
           "Content-Type": "application/json",
         },
         timeout: TIMEOUT_MS,
+        httpsAgent,
       }
     );
 
@@ -57,4 +76,9 @@ export async function generateText(prompt: string): Promise<string> {
     const detailStr = typeof body === "string" ? body : JSON.stringify(body || ax.message);
     throw new Error(`Groq API error (${status}): ${detailStr}`);
   }
+}
+
+// Backward-compatible simple call for single user prompt
+export async function generateText(prompt: string, opts?: { model?: string }): Promise<string> {
+  return chatComplete({ messages: [{ role: "user", content: prompt }], model: opts?.model });
 }

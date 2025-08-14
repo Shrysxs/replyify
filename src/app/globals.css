@@ -1,26 +1,75 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000; /* pure black */
+  --foreground: #ffffff; /* pure white */
+  --accent: #00ff00;     /* neon green */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --font-ui: var(--font-vt323);
+  --font-mono: var(--font-vt323);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base */
+html, body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ui), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: 0.01em;
 }
+
+/* Links & focus */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Controls */
+button, input, textarea, select {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid #ffffff33; /* subtle until hover */
+}
+
+button {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+textarea, input, select {
+  font-family: var(--font-mono), ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Selection */
+::selection { background: #00ff0044; color: var(--foreground); }
+
+/* Terminal box utility */
+.terminal {
+  border: 1px solid #ffffff66;
+  background: #000000;
+}
+
+/* Minimal animations */
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.98; }
+}
+
+@keyframes type-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.flicker { animation: crt-flicker 2.4s infinite steps(2, end); }
+.typewriter { animation: type-reveal 240ms ease-out; }

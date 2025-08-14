@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import OptionsGroup from "./OptionsGroup";
-import { personas, tones, goals, topics, type PromptConfig } from "@/config/promptOptions";
+import { personas, tones, goals, type PromptConfig } from "@/config/promptOptions";
 
 type Props = {
   onChange?: (cfg: PromptConfig) => void;
@@ -21,39 +21,35 @@ export default function PromptConfigurator({ onChange }: Props) {
   }, [config, onChange]);
 
   return (
-    <div className="space-y-6">
+    <div className="grid gap-6">
       <OptionsGroup
-        title="Persona / Audience"
+        title="PERSONA / AUDIENCE"
         options={personas}
         value={config.persona}
         onChange={(persona) => setConfig((c) => ({ ...c, persona }))}
       />
       <OptionsGroup
-        title="Tone"
+        title="TONE"
         options={tones}
         value={config.tone}
         onChange={(tone) => setConfig((c) => ({ ...c, tone }))}
       />
       <OptionsGroup
-        title="Goal / Task"
+        title="GOAL / TASK"
         options={goals}
         value={config.goal}
         onChange={(goal) => setConfig((c) => ({ ...c, goal }))}
       />
-      <OptionsGroup
-        title="Topic / Context"
-        options={topics}
-        value={config.topic}
-        onChange={(topic) => setConfig((c) => ({ ...c, topic }))}
-      />
 
-      <div className="space-y-2">
-        <div className="text-xs uppercase tracking-wide opacity-75">Message or Context</div>
+      <div className="grid gap-2">
+        <div id="msg-label" className="text-[10px] uppercase tracking-widest opacity-75">MESSAGE OR CONTEXT</div>
         <textarea
           value={config.input}
           onChange={(e) => setConfig((c) => ({ ...c, input: e.target.value }))}
           placeholder="Paste the message you're replying to, or add context…"
-          className="w-full min-h-[120px] rounded-xl border border-white/10 bg-transparent p-3 outline-none focus:ring-2 focus:ring-white/20"
+          aria-label="Message or context to reply to"
+          aria-describedby="msg-label"
+          className="w-full min-h-[140px] border border-white/30 bg-transparent p-3 outline-none focus:border-[var(--accent)]"
         />
       </div>
 
@@ -63,9 +59,9 @@ export default function PromptConfigurator({ onChange }: Props) {
           onClick={() =>
             setConfig({ persona: "", tone: "", goal: "", topic: "", input: "" })
           }
-          className="rounded-lg border border-white/10 px-3 py-2 text-sm hover:bg-white/5"
+          className="border border-white/30 px-3 py-2 text-xs uppercase tracking-wider hover:border-white/60"
         >
-          Clear
+          CLEAR
         </button>
       </div>
     </div>

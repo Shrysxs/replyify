@@ -15,10 +15,11 @@ export function Chip({ label, selected, onClick, className }: ChipProps) {
       onClick={onClick}
       aria-pressed={selected}
       className={[
-        "inline-flex items-center rounded-full border px-3 py-1 text-sm transition",
+        "inline-flex items-center border px-3 py-1 text-xs transition uppercase tracking-wider",
+        "select-none",
         selected
-          ? "bg-white/10 dark:bg-white/10 border-white/20 ring-1 ring-white/20"
-          : "border-white/10 hover:bg-white/5",
+          ? "border-[var(--accent)] text-[var(--accent)]"
+          : "border-white/30 hover:border-white/60",
         className || "",
       ].join(" ")}
     >
