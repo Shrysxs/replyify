@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { NextResponse } from "next/server";
-import { generateText } from "../../../lib/hf";
+import { generateText } from "../../../lib/groq";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const model = process.env.HF_MODEL?.trim() || "tiiuae/falcon-7b-instruct";
+    const model = process.env.GROQ_MODEL?.trim() || "meta-llama/llama-4-scout-17b-16e-instruct";
     return withCors(NextResponse.json({ text, model }, { status: 200 }));
   } catch (err) {
     const isProd = process.env.NODE_ENV === "production";
