@@ -16,6 +16,15 @@ export default function Home() {
   const [output, setOutput] = React.useState<string>("");
   const controllerRef = React.useRef<AbortController | null>(null);
 
+  // Debug: verify that option selections update parent state
+  React.useEffect(() => {
+    if (process.env.NODE_ENV !== "production") {
+      try {
+        console.debug("config updated:", config);
+      } catch {}
+    }
+  }, [config]);
+
   async function handleGenerate() {
     // Cancel any in-flight request to keep UI responsive
     if (controllerRef.current) {
@@ -73,18 +82,18 @@ export default function Home() {
         </h2>
         <ol className="grid gap-2 text-[13px] leading-relaxed list-decimal pl-5">
           <li>
-            Paste the message or context you need to respond to.
+            Write what's on your mind or what you want to convey.
           </li>
           <li>
             Pick a persona, tone, and goal to match your brand and intent.
           </li>
           <li>
-            Generate and refine—copy the reply that fits and ship it.
+            Generate and refine.
           </li>
         </ol>
       </section>
 
-      <PromptConfigurator onChange={setConfig} />
+      <PromptConfigurator value={config} onChange={setConfig} />
 
       <div className="flex items-center gap-3">
         <button

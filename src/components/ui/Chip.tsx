@@ -14,6 +14,8 @@ export function Chip({ label, selected, onClick, className }: ChipProps) {
       type="button"
       onClick={onClick}
       aria-pressed={selected}
+      data-selected={selected ? "true" : "false"}
+      style={selected ? { borderColor: "var(--accent)", color: "var(--accent)" } : undefined}
       className={[
         "inline-flex items-center border px-3 py-1 text-xs transition uppercase tracking-wider",
         "select-none",

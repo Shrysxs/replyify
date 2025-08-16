@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { VT323 } from "next/font/google";
 import "./globals.css";
 
@@ -35,10 +35,12 @@ export const metadata: Metadata = {
     description: "Turn any message into a concise, on‑brand reply—fast.",
     images: ["/twitter-image"],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
+};
+
+// Next.js 15: define viewport in a dedicated export instead of metadata
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#000000",
 };
 

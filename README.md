@@ -1,6 +1,25 @@
 # Replyify
 
-Turn any message into a concise, on‑brand reply—fast.
+Replyify helps you craft concise, on‑brand text for any purpose by letting you set a persona, tone, and goal. It’s not just for replies—you can write new messages, rewrite drafts, or tailor content to different audiences.
+
+• Live demo: https://replyify-five.vercel.app
+
+## What is Replyify?
+
+Replyify is a small Next.js app that applies consistent voice and intent to your writing. You choose:
+
+- Persona/Audience (e.g. customer, investor, friend)
+- Tone (e.g. empathetic, formal, witty)
+- Goal/Task (e.g. clarify, persuade, follow‑up)
+
+Paste what you want to say (or a rough idea), pick the sliders, and generate a clean draft that matches your brand.
+
+## Features
+
+- Persona, tone, and goal controls to shape output
+- Fast generation via Groq API
+- Simple, accessible UI with keyboard‑friendly chips
+- Stateless API endpoint you can call from elsewhere (`/api/generate`)
 
 ## Getting Started
 
@@ -24,40 +43,17 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Learn More
 
-Built with Next.js App Router, Tailwind, and the Groq API (OpenAI-compatible Chat Completions).
+Built with Next.js App Router, Tailwind, and the Groq API.
 
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Live deployment: https://replyify-five.vercel.app
 
----
+Check out Next.js deployment docs if you want to deploy your own fork: https://nextjs.org/docs/app/building-your-application/deploying
 
-# Codebase Map
 
-- __`src/app/`__ – App Router pages and API routes
-  - __`app/page.tsx`__ – Main UI with `PromptConfigurator` and generate action
-  - __`app/layout.tsx`__ – App shell, fonts, and global CSS
-  - __`app/api/generate/route.ts`__ – Builds prompt and calls Groq
-  - __`app/api/reply/route.ts`__ – Generic prompt+context endpoint
-
-- __`src/components/`__ – UI components
-  - __`components/prompt/PromptConfigurator.tsx`__ – Controls for persona/tone/goal/input
-  - __`components/prompt/OptionsGroup.tsx`__ – Reusable option selector
-  - __`components/ui/Chip.tsx`__ – Selectable chip component
-
-- __`src/config/`__ – Static configuration
-  - __`config/promptOptions.ts`__ – Options and types for prompt config
-
-- __`src/lib/`__ – Server-side integrations
-  - __`lib/groq.ts`__ – Groq API client (OpenAI-compatible Chat Completions)
-  - __`lib/llm.ts`__ – Unified service: system prompt, model selection, formatting
-
-- __`src/utils/`__ – Pure utilities (intentionally minimal)
-
-- __Root config__
-  - __`next.config.ts`__, __`tsconfig.json`__, __`eslint.config.mjs`__, __`postcss.config.mjs`__, __`.prettierrc`__
 
 ## Development
 
@@ -77,16 +73,37 @@ GROQ_MAX_TOKENS=512
 GROQ_TEMPERATURE=0.7
 
 # Optional, used for absolute metadata URLs (OG/Twitter)
-NEXT_PUBLIC_SITE_URL=https://replyify.app
+NEXT_PUBLIC_SITE_URL=https://replyify-five.vercel.app
 ```
 
 - `GROQ_*` variables are server-only and read in `src/lib/groq.ts` and API routes.
 - `NEXT_PUBLIC_SITE_URL` is safe to expose; it sets `metadataBase` in `src/app/layout.tsx` for correct social preview URLs.
 
+## API
+
+- POST `POST /api/generate`
+  - Body fields (strings; optional unless noted):
+    - `rawInput` (required): what you want to write or rewrite
+    - `persona`, `tone`, `goal`, `topic`, `context`, `system`
+  - Returns: `{ text: string }`
+
+## Tech Stack
+
+- Next.js App Router (Node runtime)
+- React + Tailwind CSS v4
+- Groq API
+
+## Notes
+
+- Replyify focuses on voice and intent setting (persona/tone/goal). It works for replies, new messages, summaries, or rewrites—anything that benefits from consistent style.
+
 ## Cleanup Notes
 
 - Removed unused `services/` indirection; use `@/lib/groq` directly.
-- Unused packages removed: `openai`, `dotenv`.
 - Default `public/*.svg` assets appear unused; safe to delete.
 - Unused files removed: `src/components/ReplyForm.tsx`, `src/lib/hf.ts`, `src/services/*`.
 - Prompt composition centralized in `src/lib/llm.ts`; `utils/buildPrompt.ts` is obsolete.
+
+## License
+
+MIT License. See [`LICENSE`](./LICENSE).
