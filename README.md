@@ -20,6 +20,9 @@ Paste what you want to say (or a rough idea), pick the sliders, and generate a c
 - Fast generation via Groq API
 - Simple, accessible UI with keyboard‑friendly chips
 - Stateless API endpoint you can call from elsewhere (`/api/generate`)
+- Humanize button to make the output more natural and conversational
+- Copy button to copy the generated text to the clipboard
+- Temperature slider (0–1) to control focus vs. creativity
 
 ## Getting Started
 
@@ -45,6 +48,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 Built with Next.js App Router, Tailwind, and the Groq API.
 
+Live deployment: https://replyify-five.vercel.app
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
@@ -61,7 +66,7 @@ Check out Next.js deployment docs if you want to deploy your own fork: https://n
 - Dev server: `npm run dev` → http://localhost:3000
 - Quality: `npm run lint`, `npm run lint:fix`, `npm run typecheck`, `npm run format`
 
-## Environment
+### Environment
 
 Create `.env.local` (not committed):
 
