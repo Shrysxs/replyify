@@ -82,7 +82,7 @@ export default function Home() {
         </h2>
         <ol className="grid gap-2 text-[13px] leading-relaxed list-decimal pl-5">
           <li>
-            Write what's on your mind or what you want to convey.
+            Write what&apos;s on your mind or what you want to convey.
           </li>
           <li>
             Pick a persona, tone, and goal to match your brand and intent.
