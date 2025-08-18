@@ -148,7 +148,8 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open X profile @xshrey_9"
-            className="p-1.5 text-[var(--foreground)] hover:text-[var(--foreground)] visited:text-[var(--foreground)] focus:text-[var(--foreground)] no-underline opacity-90 hover:opacity-100 transition-opacity"
+            className="p-1.5 no-underline opacity-90 hover:opacity-100 transition-opacity"
+            style={{ color: "var(--foreground)" }}
           >
             <svg
               width="18"

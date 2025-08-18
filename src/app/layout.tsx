@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { VT323 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const vt323 = VT323({
@@ -74,6 +75,8 @@ export default function RootLayout({
         {/* App Content */}
         <div className="relative z-10">
           {children}
+          {/* Vercel Analytics */}
+          <Analytics />
         </div>
       </body>
     </html>
