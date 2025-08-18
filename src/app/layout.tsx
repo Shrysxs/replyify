@@ -58,7 +58,7 @@ export default function RootLayout({
       <body className={`${vt323.variable} antialiased min-h-screen w-full relative overflow-x-hidden bg-black`}>
         {/* Dark Noise Colored Background */}
         <div
-          className="absolute inset-0 z-0 pointer-events-none"
+          className="fixed inset-0 z-0 pointer-events-none"
           aria-hidden="true"
           style={{
             background: "#000000",

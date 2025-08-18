@@ -148,7 +148,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open X profile @xshrey_9"
-            className="border border-white/30 px-3 py-1.5 text-xs uppercase tracking-widest hover:border-white/60 hover:text-[var(--accent)] hover:shadow-[0_0_20px_#00ff0033] transition-colors"
+            className="p-1.5 text-inherit opacity-90 hover:opacity-100 transition-opacity"
           >
             <svg
               width="18"
