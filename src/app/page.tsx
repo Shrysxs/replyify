@@ -80,7 +80,7 @@ export default function Home() {
       await navigator.clipboard.writeText(output);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch (e) {
+    } catch {
       // Fallback
       try {
         const ta = document.createElement("textarea");
@@ -140,8 +140,33 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-3xl p-6 grid gap-6">
-      <header className="grid gap-1">
-        <h1 className="text-3xl uppercase tracking-widest">REPLYIFY</h1>
+      <header className="grid gap-2">
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="text-3xl uppercase tracking-widest">REPLYIFY</h1>
+          <a
+            href="https://x.com/xshrey_9"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open X profile @xshrey_9"
+            className="border border-white/30 px-3 py-1.5 text-xs uppercase tracking-widest hover:border-white/60 hover:text-[var(--accent)] hover:shadow-[0_0_20px_#00ff0033] transition-colors"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+              className="block"
+            >
+              <path
+                fill="currentColor"
+                d="M18.244 2.25 12.98 8.248 8.6 2.25H2l7.513 9.898L2 21.75h6.6l4.38-5.998 5.27 5.998H23l-7.9-9.76 7.4-9.74h-4.256Z"
+              />
+            </svg>
+            <span className="sr-only">X</span>
+          </a>
+        </div>
         <p className="text-xs opacity-70 uppercase tracking-wide">
           Turn any message into a concise, on‑brand reply—fast.
         </p>

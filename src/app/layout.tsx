@@ -55,40 +55,22 @@ export default function RootLayout({
         <link rel="preconnect" href="https://api.groq.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//api.groq.com" />
       </head>
-      <body className={`${vt323.variable} antialiased min-h-screen w-full relative overflow-x-hidden bg-[#020617]`}>
-        {/* Emerald Radial Glow Background */}
+      <body className={`${vt323.variable} antialiased min-h-screen w-full relative overflow-x-hidden bg-black`}>
+        {/* Dark Noise Colored Background */}
         <div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 pointer-events-none"
+          aria-hidden="true"
           style={{
-            backgroundImage:
-              `radial-gradient(circle 500px at 50% 300px, rgba(16,185,129,0.35), transparent)`,
+            background: "#000000",
+            backgroundImage: `
+        radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0)
+      `,
+            backgroundSize: "20px 20px, 30px 30px, 25px 25px",
+            backgroundPosition: "0 0, 10px 10px, 15px 5px",
           }}
         />
-        {/* X Profile Link */}
-        <a
-          href="https://x.com/xshrey_9"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Open X profile @xshrey_9"
-          className="fixed top-4 right-4 z-20 border border-white/30 px-3 py-1.5 text-xs uppercase tracking-widest hover:border-white/60 hover:text-[var(--accent)] hover:shadow-[0_0_20px_#00ff0033] transition-colors"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            focusable="false"
-            className="block"
-          >
-            {/* Simple Icons: X (brand) */}
-            <path
-              fill="currentColor"
-              d="M18.244 2.25 12.98 8.248 8.6 2.25H2l7.513 9.898L2 21.75h6.6l4.38-5.998 5.27 5.998H23l-7.9-9.76 7.4-9.74h-4.256Z"
-            />
-          </svg>
-          <span className="sr-only">X</span>
-        </a>
         {/* App Content */}
         <div className="relative z-10">
           {children}
