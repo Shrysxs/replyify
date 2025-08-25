@@ -139,33 +139,35 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-3xl p-6 grid gap-6">
+    <main className="mx-auto max-w-6xl p-6 grid gap-6">
       <header className="grid gap-2">
         <div className="flex items-center justify-between gap-3">
-          <h1 className="text-3xl uppercase tracking-widest">REPLYIFY</h1>
+          <h1 className="retro text-3xl uppercase tracking-widest">REPLYIFY</h1>
           <a
             href="https://x.com/xshrey_9"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open X profile @xshrey_9"
-            className="p-1.5 no-underline opacity-90 hover:opacity-100 transition-opacity"
+            className="no-underline opacity-90 hover:opacity-100 transition-opacity"
             style={{ color: "var(--foreground)" }}
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              focusable="false"
-              className="block"
-            >
-              <path
-                fill="currentColor"
-                d="M18.244 2.25 12.98 8.248 8.6 2.25H2l7.513 9.898L2 21.75h6.6l4.38-5.998 5.27 5.998H23l-7.9-9.76 7.4-9.74h-4.256Z"
-              />
-            </svg>
-            <span className="sr-only">X</span>
+            <div className="glass neon-hover rounded-full p-2 border border-white/20">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+                className="block"
+              >
+                <path
+                  fill="currentColor"
+                  d="M18.244 2.25 12.98 8.248 8.6 2.25H2l7.513 9.898L2 21.75h6.6l4.38-5.998 5.27 5.998H23l-7.9-9.76 7.4-9.74h-4.256Z"
+                />
+              </svg>
+              <span className="sr-only">X</span>
+            </div>
           </a>
         </div>
         <p className="text-xs opacity-70 uppercase tracking-wide">
@@ -173,98 +175,116 @@ export default function Home() {
         </p>
       </header>
 
-      <section aria-labelledby="how-it-works-title" className="grid gap-2">
-        <h2 id="how-it-works-title" className="text-sm uppercase tracking-widest opacity-80">
-          How it works
-        </h2>
-        <ol className="grid gap-2 text-[13px] leading-relaxed list-decimal pl-5">
-          <li>
-            Write what&apos;s on your mind or what you want to convey.
-          </li>
-          <li>
-            Pick a persona, tone, and goal to match your brand and intent.
-          </li>
-          <li>
-            Generate and refine.
-          </li>
-        </ol>
-      </section>
+      <div className="grid gap-6 md:grid-cols-2">
+        <section aria-labelledby="how-it-works-title" className="grid gap-2 glass neon-hover p-4">
+          <h2 id="how-it-works-title" className="text-sm uppercase tracking-widest opacity-90 retro">
+            How it works
+          </h2>
+          <ol className="grid gap-2 text-[13px] leading-relaxed list-decimal pl-5">
+            <li>
+              Write what&apos;s on your mind or what you want to convey.
+            </li>
+            <li>
+              Pick a persona, tone, and goal to match your brand and intent.
+            </li>
+            <li>
+              Generate and refine.
+            </li>
+          </ol>
+        </section>
 
-      <section className="grid gap-4">
-        <PromptConfigurator
-          value={config}
-          onChange={setConfig}
-        />
-        {/* Temperature Slider */}
-        <div className="grid gap-2">
-          <label htmlFor="temp" className="text-xs uppercase tracking-widest opacity-80">Temperature</label>
-          <div className="flex items-center gap-3">
-            <input
-              id="temp"
-              type="range"
-              min={0}
-              max={1}
-              step={0.05}
-              value={temperature}
-              onChange={(e) => setTemperature(parseFloat(e.target.value))}
-              className="w-full accent-[var(--accent)]"
-              aria-valuemin={0}
-              aria-valuemax={1}
-              aria-valuenow={Number.isFinite(temperature) ? Number(temperature.toFixed(2)) : 0.7}
-            />
-            <span className="text-xs tabular-nums opacity-80 w-10 text-right">{temperature.toFixed(2)}</span>
-          </div>
-          <p className="text-[11px] opacity-60">
-            Lower = more focused. Higher = more creative.
-          </p>
-        </div>
-      </section>
-
-      <div className="flex items-center gap-3">
-        <button
-          type="button"
-          onClick={handleGenerate}
-          disabled={loading || humanizing || !config.input}
-          aria-busy={loading}
-          aria-controls="reply-output"
-          className="border px-5 py-2 text-xs uppercase tracking-wider disabled:opacity-50
-                     border-[var(--accent)] text-[var(--accent)] hover:opacity-90"
-        >
-          {loading ? "GENERATING…" : "GENERATE"}
-        </button>
-        <button
-          type="button"
-          onClick={handleHumanize}
-          disabled={humanizing || loading || !output}
-          aria-busy={humanizing}
-          className="border border-white/30 px-4 py-2 text-xs uppercase tracking-wider disabled:opacity-50 hover:border-white/60"
-        >
-          {humanizing ? "HUMANIZING…" : "HUMANIZE"}
-        </button>
-        {error ? (
-          <span role="alert" aria-live="assertive" className="text-xs text-red-400 uppercase tracking-wide">{error}</span>
-        ) : null}
-      </div>
-
-      {output ? (
-        <section id="reply-output" className="terminal p-4" aria-live="polite">
-          <div className="flex items-center justify-between mb-2">
-            <div className="text-[10px] uppercase opacity-75">OUTPUT</div>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handleCopy}
-                disabled={!output}
-                className="border border-white/30 px-2 py-1 text-[10px] uppercase tracking-widest disabled:opacity-50 hover:border-white/60"
-                aria-label="Copy output to clipboard"
-              >
-                {copied ? "COPIED" : "COPY"}
-              </button>
+        <section className="grid gap-4">
+          <PromptConfigurator
+            value={config}
+            onChange={setConfig}
+          />
+          {/* Temperature Slider */}
+          <div className="grid gap-2 glass neon-hover p-4">
+            <div className="flex items-center justify-between">
+              <label htmlFor="temp" className="text-xs uppercase tracking-widest opacity-90">Temperature</label>
+              <div className="tooltip text-[11px] opacity-80">
+                <span className="underline decoration-dotted cursor-help">hint</span>
+                <span className="tooltip-content">Lower = focused | Higher = creative</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                id="temp"
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={temperature}
+                onChange={(e) => setTemperature(parseFloat(e.target.value))}
+                className="w-full glow-range"
+                aria-valuemin={0}
+                aria-valuemax={1}
+                aria-valuenow={Number.isFinite(temperature) ? Number(temperature.toFixed(2)) : 0.7}
+              />
+              <span className="text-xs tabular-nums opacity-80 w-10 text-right">{temperature.toFixed(2)}</span>
             </div>
           </div>
-          <div className="whitespace-pre-wrap leading-relaxed typewriter">{output}</div>
         </section>
-      ) : null}
+
+        <section className="grid content-start gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={handleGenerate}
+              disabled={loading || humanizing || !config.input}
+              aria-busy={loading}
+              aria-controls="reply-output"
+              className="glass neon-hover border px-5 py-2 text-xs uppercase tracking-wider disabled:opacity-50 border-[var(--accent)] text-[var(--accent)]"
+            >
+              {loading ? (
+                <span>
+                  GENERATING<span className="loading-dots" aria-hidden="true"></span>
+                </span>
+              ) : (
+                "GENERATE"
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={handleHumanize}
+              disabled={humanizing || loading || !output}
+              aria-busy={humanizing}
+              className="glass neon-hover border border-white/30 px-4 py-2 text-xs uppercase tracking-wider disabled:opacity-50"
+            >
+              {humanizing ? (
+                <span>
+                  HUMANIZING<span className="loading-dots" aria-hidden="true"></span>
+                </span>
+              ) : (
+                "HUMANIZE"
+              )}
+            </button>
+            {error ? (
+              <span role="alert" aria-live="assertive" className="text-xs text-red-400 uppercase tracking-wide">{error}</span>
+            ) : null}
+          </div>
+
+          {output ? (
+            <section id="reply-output" className="terminal glass neon-hover p-4 flicker" aria-live="polite">
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-[10px] uppercase opacity-75">OUTPUT</div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    disabled={!output}
+                    className="glass neon-hover border border-white/30 px-2 py-1 text-[10px] uppercase tracking-widest disabled:opacity-50"
+                    aria-label="Copy output to clipboard"
+                  >
+                    {copied ? "COPIED" : "COPY"}
+                  </button>
+                </div>
+              </div>
+              <div className="whitespace-pre-wrap leading-relaxed typewriter">{output}</div>
+            </section>
+          ) : null}
+        </section>
+      </div>
     </main>
   );
 }

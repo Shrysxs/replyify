@@ -10,8 +10,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
-  --font-ui: var(--font-vt323);
-  --font-mono: var(--font-vt323);
+  --font-ui: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-retro: var(--font-vt323);
 }
 
 /* Base */
@@ -22,7 +23,7 @@ html, body {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-ui), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-ui);
   letter-spacing: 0.01em;
 }
 
@@ -48,16 +49,37 @@ button {
 }
 
 textarea, input, select {
-  font-family: var(--font-mono), ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-mono);
 }
 
 /* Selection */
 ::selection { background: #00ff0044; color: var(--foreground); }
 
+/* Glassmorphism utilities */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 0 0 1px rgba(0,255,120,0.06) inset, 0 10px 30px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+}
+
+.neon-hover {
+  transition: box-shadow .25s ease, transform .2s ease, border-color .25s ease;
+}
+.neon-hover:hover {
+  box-shadow: 0 0 0 1px rgba(0,255,120,0.35) inset, 0 0 22px rgba(0,255,120,0.25);
+  border-color: rgba(0,255,120,0.5);
+}
+
 /* Terminal box utility */
 .terminal {
-  border: 1px solid #ffffff66;
-  background: #000000;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
 }
 
 /* Minimal animations */
@@ -71,5 +93,83 @@ textarea, input, select {
   to { opacity: 1; }
 }
 
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes dots {
+  0% { content: ""; }
+  33% { content: "."; }
+  66% { content: ".."; }
+  100% { content: "..."; }
+}
+
 .flicker { animation: crt-flicker 2.4s infinite steps(2, end); }
-.typewriter { animation: type-reveal 240ms ease-out; }
+.typewriter { position: relative; animation: type-reveal 240ms ease-out; }
+.typewriter::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 1.15em;
+  background: rgba(0,255,120,0.85);
+  margin-left: 6px;
+  display: inline-block;
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+
+.loading-dots::after {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--accent);
+  content: "";
+  animation: dots 1.2s infinite steps(3, end);
+}
+
+/* Range slider styling */
+input[type="range"].glow-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(0,255,120,0.1), rgba(0,255,120,0.6));
+  border-radius: 999px;
+  outline: none;
+  border: 1px solid rgba(0,255,120,0.2);
+  box-shadow: 0 0 10px rgba(0,255,120,0.25) inset;
+}
+input[type="range"].glow-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #000;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px rgba(0,255,120,0.6);
+}
+input[type="range"].glow-range::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%; background: #000; border: 2px solid var(--accent); box-shadow: 0 0 10px rgba(0,255,120,0.6);
+}
+
+/* Tooltip */
+.tooltip { position: relative; }
+.tooltip .tooltip-content {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 125%;
+  white-space: nowrap;
+  font-size: 11px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.8);
+  color: var(--foreground);
+  border: 1px solid rgba(0,255,120,0.35);
+  box-shadow: 0 0 18px rgba(0,255,120,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.tooltip:hover .tooltip-content { opacity: 1; transform: translateX(-50%) translateY(-2px); }
+
+/* Retro header utility */
+.retro { font-family: var(--font-retro), monospace; letter-spacing: 0.08em; }

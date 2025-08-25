@@ -17,10 +17,11 @@ export function Chip({ label, selected, onClick, className }: ChipProps) {
       data-selected={selected ? "true" : "false"}
       style={selected ? { borderColor: "var(--accent)", color: "var(--accent)" } : undefined}
       className={[
-        "inline-flex items-center border px-3 py-1 text-xs transition uppercase tracking-wider",
-        "select-none",
+        "inline-flex items-center select-none uppercase tracking-wider text-xs",
+        "border rounded-full px-3 py-1 transition-all",
+        "glass neon-hover",
         selected
-          ? "border-[var(--accent)] text-[var(--accent)]"
+          ? "border-[var(--accent)] text-[var(--accent)] shadow-[0_0_12px_rgba(0,255,120,0.25)]"
           : "border-white/30 hover:border-white/60",
         className || "",
       ].join(" ")}
