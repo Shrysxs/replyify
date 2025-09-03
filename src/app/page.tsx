@@ -142,23 +142,23 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl p-6 grid gap-6">
+    <main className="mx-auto max-w-6xl p-4 sm:p-6 grid gap-4 sm:gap-6 min-h-screen">
       <header className="grid gap-2">
         <div className="flex items-center justify-between gap-3">
           <h1 className="retro text-3xl uppercase tracking-widest">REPLYIFY</h1>
           <a
-            href="https://x.com/xshrey_9"
+            href="https://x.com/Shrysxs"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open X profile @xshrey_9"
+            aria-label="Open X profile @Shrysxs"
             className="no-underline opacity-90 hover:opacity-100 transition-opacity"
             style={{ color: "var(--foreground)" }}
           >
-            <div className="glass neon-hover rounded-full p-2 border border-white/20">
+            <div className="glass neon-hover rounded-full p-2 border border-white/20 flex items-center justify-center">
               <svg
                 width="18"
                 height="18"
-                viewBox="0 0 24 24"
+                viewBox="0 0 1200 1227"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 focusable="false"
@@ -166,7 +166,7 @@ export default function Home() {
               >
                 <path
                   fill="currentColor"
-                  d="M18.244 2.25 12.98 8.248 8.6 2.25H2l7.513 9.898L2 21.75h6.6l4.38-5.998 5.27 5.998H23l-7.9-9.76 7.4-9.74h-4.256Z"
+                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
                 />
               </svg>
               <span className="sr-only">X</span>
@@ -178,8 +178,8 @@ export default function Home() {
         </p>
       </header>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <section aria-labelledby="how-it-works-title" className="grid gap-2 glass neon-hover p-4">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
+        <section aria-labelledby="how-it-works-title" className="grid gap-2 glass neon-hover p-3 sm:p-4">
           <h2 id="how-it-works-title" className="text-sm uppercase tracking-widest opacity-90 retro">
             How it works
           </h2>
@@ -196,13 +196,13 @@ export default function Home() {
           </ol>
         </section>
 
-        <section className="grid gap-4">
+        <section className="grid gap-3 sm:gap-4">
           <PromptConfigurator
             value={config}
             onChange={setConfig}
           />
           {/* Temperature Slider */}
-          <div className="grid gap-2 glass neon-hover p-4">
+          <div className="grid gap-2 glass neon-hover p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <label htmlFor="temp" className="text-xs uppercase tracking-widest opacity-90">Temperature</label>
               <div className="tooltip text-[11px] opacity-80">
@@ -229,15 +229,15 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="grid content-start gap-4">
-          <div className="flex items-center gap-3">
+        <section className="grid content-start gap-3 sm:gap-4 lg:col-span-2">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={handleGenerate}
               disabled={loading || humanizing || !config.input}
               aria-busy={loading}
               aria-controls="reply-output"
-              className="glass neon-hover border px-5 py-2 text-xs uppercase tracking-wider disabled:opacity-50 border-[var(--accent)] text-[var(--accent)]"
+              className="glass neon-hover border px-4 sm:px-5 py-2 text-xs uppercase tracking-wider disabled:opacity-50 border-[var(--accent)] text-[var(--accent)] flex-shrink-0"
             >
               {loading ? (
                 <span>
@@ -252,7 +252,7 @@ export default function Home() {
               onClick={handleHumanize}
               disabled={humanizing || loading || !output}
               aria-busy={humanizing}
-              className="glass neon-hover border border-white/30 px-4 py-2 text-xs uppercase tracking-wider disabled:opacity-50"
+              className="glass neon-hover border border-white/30 px-3 sm:px-4 py-2 text-xs uppercase tracking-wider disabled:opacity-50 flex-shrink-0"
             >
               {humanizing ? (
                 <span>
@@ -263,12 +263,12 @@ export default function Home() {
               )}
             </button>
             {error ? (
-              <span role="alert" aria-live="assertive" className="text-xs text-red-400 uppercase tracking-wide">{error}</span>
+              <span role="alert" aria-live="assertive" className="text-xs text-red-400 uppercase tracking-wide break-words">{error}</span>
             ) : null}
           </div>
 
           {output ? (
-            <section id="reply-output" className="terminal glass neon-hover p-4 flicker" aria-live="polite">
+            <section id="reply-output" className="terminal glass neon-hover p-3 sm:p-4 flicker" aria-live="polite">
               <div className="flex items-center justify-between mb-2">
                 <div className="text-[10px] uppercase opacity-75">OUTPUT</div>
                 <div className="flex items-center gap-2">
@@ -276,14 +276,14 @@ export default function Home() {
                     type="button"
                     onClick={handleCopy}
                     disabled={!output}
-                    className="glass neon-hover border border-white/30 px-2 py-1 text-[10px] uppercase tracking-widest disabled:opacity-50"
+                    className="glass neon-hover border border-white/30 px-2 py-1 text-[10px] uppercase tracking-widest disabled:opacity-50 flex-shrink-0"
                     aria-label="Copy output to clipboard"
                   >
                     {copied ? "COPIED" : "COPY"}
                   </button>
                 </div>
               </div>
-              <div className="whitespace-pre-wrap leading-relaxed typewriter">{output}</div>
+              <div className="whitespace-pre-wrap leading-relaxed typewriter break-words overflow-hidden">{output}</div>
             </section>
           ) : null}
         </section>
