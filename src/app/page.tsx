@@ -19,14 +19,7 @@ export default function Home() {
   const [copied, setCopied] = React.useState(false);
   const [temperature, setTemperature] = React.useState<number>(0.7);
 
-  // Debug: verify that option selections update parent state
-  React.useEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
-      try {
-        console.debug("config updated:", config);
-      } catch {}
-    }
-  }, [config]);
+  // Removed debug logging for better performance
 
   async function handleHumanize() {
     if (!output) return;

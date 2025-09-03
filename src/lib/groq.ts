@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import https from "https";
 
 // Server-side helper to call Groq's OpenAI-compatible Chat Completions API
 // Ensure GROQ_API_KEY is set in your environment (never expose it on the client)
@@ -15,7 +14,7 @@ const MAX_TOKENS = Number(process.env.GROQ_MAX_TOKENS || 512);
 const TEMPERATURE = Number(process.env.GROQ_TEMPERATURE || 0.7);
 const STOP_SEQS = (process.env.GROQ_STOP || "")
   .split(",")
-  .map((s) => s.trim())
+  .map((s: string) => s.trim())
   .filter(Boolean);
 
 export type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
@@ -49,7 +48,7 @@ export async function chatComplete({
   };
 
   try {
-    const httpsAgent = new https.Agent({ keepAlive: true, keepAliveMsecs: 1000, maxSockets: 50 });
+    // Removed https agent - not providing significant performance benefit for this use case
     const resp = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       payload,
@@ -59,7 +58,6 @@ export async function chatComplete({
           "Content-Type": "application/json",
         },
         timeout: TIMEOUT_MS,
-        httpsAgent,
       }
     );
 
@@ -78,7 +76,4 @@ export async function chatComplete({
   }
 }
 
-// Backward-compatible simple call for single user prompt
-export async function generateText(prompt: string, opts?: { model?: string }): Promise<string> {
-  return chatComplete({ messages: [{ role: "user", content: prompt }], model: opts?.model });
-}
+// Removed unused generateText function - functionality handled by /lib/llm.ts

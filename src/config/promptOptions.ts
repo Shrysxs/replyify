@@ -39,17 +39,7 @@ export const goals = [
   "network",
 ];
 
-export const topics = [
-  "tech",
-  "startups",
-  "ai",
-  "design",
-  "growth",
-  "education",
-  "philosophy",
-  "science",
-  "career",
-];
+// Removed unused topics array - not referenced anywhere in the codebase
 
 // Rich, compact guides that the prompt engine can use to enforce option-specific style.
 // Keep descriptions short to minimize tokens while providing clear stylistic targets.

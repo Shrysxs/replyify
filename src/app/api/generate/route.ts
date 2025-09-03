@@ -77,11 +77,7 @@ export async function POST(req: Request) {
     // Cache successful output
     if (output) apiCache.set(cacheKey, output);
 
-    if (process.env.NODE_ENV !== "production") {
-      try {
-        console.debug("/api/generate -> success, preview:", output.slice(0, 200));
-      } catch {}
-    }
+    // Removed debug logging for better performance
 
     return NextResponse.json({ text: output }, { status: 200 });
   } catch (err) {

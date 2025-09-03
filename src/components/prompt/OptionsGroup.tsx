@@ -22,11 +22,6 @@ export default function OptionsGroup({ title, options, value, onChange }: Props)
               label={opt}
               selected={isSelected}
               onClick={() => {
-                if (process.env.NODE_ENV !== "production") {
-                  try {
-                    console.debug(`[OptionsGroup] ${title} click`, { opt, isSelected, next: isSelected ? "" : opt });
-                  } catch {}
-                }
                 onChange(isSelected ? "" : opt);
               }}
             />
