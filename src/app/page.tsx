@@ -135,175 +135,153 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-grid-pattern relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="floating-orb orb-1"></div>
-        <div className="floating-orb orb-2"></div>
-        <div className="floating-orb orb-3"></div>
-      </div>
-      
-      <main className="relative z-10 mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
-        {/* Hero Section */}
-        <header className="text-center py-8 sm:py-12 lg:py-16">
-          <div className="inline-flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 glass neon-hover rounded-full flex items-center justify-center pulse-glow">
-              <div className="w-6 h-6 bg-accent rounded-full animate-pulse"></div>
-            </div>
-            <h1 className="retro text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest glow-text">
-              REPLYIFY
-            </h1>
-            <a
-              href="https://x.com/Shrysxs"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Follow @Shrysxs on X"
-              className="glass neon-hover rounded-full p-3 border border-white/20 hover:border-accent/50 transition-all duration-300 hover:scale-110"
-            >
-              <svg width="20" height="20" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg" className="fill-current">
-                <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+    <main className="mx-auto max-w-6xl p-4 sm:p-6 grid gap-4 sm:gap-6 min-h-screen">
+      {/* Header with X logo in top right */}
+      <header className="grid gap-2">
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="retro text-3xl uppercase tracking-widest">REPLYIFY</h1>
+          <a
+            href="https://x.com/Shrysxs"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open X profile @Shrysxs"
+            className="no-underline opacity-90 hover:opacity-100 transition-opacity"
+            style={{ color: "var(--foreground)" }}
+          >
+            <div className="glass neon-hover rounded-full p-2 border border-white/20 flex items-center justify-center">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 1200 1227"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+                className="block"
+              >
+                <path
+                  fill="currentColor"
+                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+                />
               </svg>
-            </a>
-          </div>
-          
-          <div className="max-w-2xl mx-auto mb-8">
-            <p className="text-lg sm:text-xl mb-4 typing-animation">
-              Transform your thoughts into polished, context-aware text
-            </p>
-            <p className="text-sm opacity-70 uppercase tracking-wide">
-              AI-powered • Context-aware • Lightning fast
-            </p>
-          </div>
-        </header>
-
-        {/* Main Content Grid */}
-        <div className="grid gap-6 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4">
-          {/* How it Works - Compact Card */}
-          <section className="xl:col-span-1 2xl:col-span-1">
-            <div className="glass neon-hover p-4 sm:p-6 h-full">
-              <h2 className="text-sm uppercase tracking-widest opacity-90 retro mb-4 flex items-center gap-2">
-                <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-                How it works
-              </h2>
-              <ol className="space-y-3 text-sm leading-relaxed">
-                <li className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-xs font-bold mt-0.5">1</span>
-                  <span>Write your thoughts or ideas</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-xs font-bold mt-0.5">2</span>
-                  <span>Choose persona, tone & goal</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-xs font-bold mt-0.5">3</span>
-                  <span>Generate & refine instantly</span>
-                </li>
-              </ol>
+              <span className="sr-only">X</span>
             </div>
-          </section>
-
-          {/* Configuration Panel */}
-          <section className="xl:col-span-2 2xl:col-span-2">
-            <div className="grid gap-4">
-              <PromptConfigurator value={config} onChange={setConfig} />
-              
-              {/* Temperature Slider */}
-              <div className="glass neon-hover p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <label htmlFor="temp" className="text-xs uppercase tracking-widest opacity-90 flex items-center gap-2">
-                    <span className="w-2 h-2 bg-accent/60 rounded-full"></span>
-                    Temperature
-                  </label>
-                  <div className="tooltip text-xs opacity-80">
-                    <span className="underline decoration-dotted cursor-help">effects</span>
-                    <span className="tooltip-content">0.0-0.3: Conservative | 0.4-0.6: Balanced | 0.7-1.0: Creative</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <input
-                    id="temp"
-                    type="range"
-                    min={0}
-                    max={1}
-                    step={0.05}
-                    value={temperature}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTemperature(parseFloat(e.target.value))}
-                    className="w-full glow-range"
-                  />
-                  <span className="text-xs tabular-nums opacity-80 w-12 text-right bg-black/30 px-2 py-1 rounded border border-white/10">
-                    {temperature.toFixed(2)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Action Panel & Output */}
-          <section className="xl:col-span-3 2xl:col-span-4">
-            <div className="space-y-6">
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  onClick={handleGenerate}
-                  disabled={loading || humanizing || !config.input}
-                  className="glass neon-hover border border-accent text-accent px-6 py-3 text-sm uppercase tracking-wider disabled:opacity-50 hover:bg-accent/10 transition-all duration-300 flex items-center gap-2"
-                >
-                  <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-                  {loading ? (
-                    <span>GENERATING<span className="loading-dots"></span></span>
-                  ) : (
-                    "GENERATE"
-                  )}
-                </button>
-                
-                <button
-                  type="button"
-                  onClick={handleHumanize}
-                  disabled={humanizing || loading || !output}
-                  className="glass neon-hover border border-white/30 px-5 py-3 text-sm uppercase tracking-wider disabled:opacity-50 hover:border-white/50 transition-all duration-300"
-                >
-                  {humanizing ? (
-                    <span>HUMANIZING<span className="loading-dots"></span></span>
-                  ) : (
-                    "HUMANIZE"
-                  )}
-                </button>
-                
-                {error && (
-                  <div className="flex items-center gap-2 text-red-400 text-sm">
-                    <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
-                    <span>{error}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Output Terminal */}
-              {output && (
-                <div className="terminal glass neon-hover p-6 flicker">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 bg-accent rounded-full animate-pulse"></span>
-                      <span className="text-xs uppercase opacity-75 tracking-wider">OUTPUT</span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleCopy}
-                      disabled={!output}
-                      className="glass neon-hover border border-white/30 px-3 py-1.5 text-xs uppercase tracking-widest hover:border-accent/50 transition-all duration-300"
-                    >
-                      {copied ? "✓ COPIED" : "COPY"}
-                    </button>
-                  </div>
-                  <div className="whitespace-pre-wrap leading-relaxed typewriter text-base">
-                    {output}
-                  </div>
-                </div>
-              )}
-            </div>
-          </section>
+          </a>
         </div>
-      </main>
-    </div>
+        <p className="text-xs opacity-70 uppercase tracking-wide">
+          Transform your thoughts into polished, context-aware text—fast.
+        </p>
+      </header>
+
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
+        <section aria-labelledby="how-it-works-title" className="grid gap-2 glass neon-hover p-3 sm:p-4">
+          <h2 id="how-it-works-title" className="text-sm uppercase tracking-widest opacity-90 retro">
+            How it works
+          </h2>
+          <ol className="grid gap-2 text-[13px] leading-relaxed list-decimal pl-5">
+            <li>
+              Write what&apos;s on your mind or what you want to convey.
+            </li>
+            <li>
+              Pick a persona, tone, and goal to match your brand and intent.
+            </li>
+            <li>
+              Generate and refine.
+            </li>
+          </ol>
+        </section>
+
+        <section className="grid gap-3 sm:gap-4">
+          <PromptConfigurator
+            value={config}
+            onChange={setConfig}
+          />
+          {/* Temperature Slider */}
+          <div className="grid gap-2 glass neon-hover p-3 sm:p-4">
+            <div className="flex items-center justify-between">
+              <label htmlFor="temp" className="text-xs uppercase tracking-widest opacity-90">Temperature</label>
+              <div className="tooltip text-[11px] opacity-80">
+                <span className="underline decoration-dotted cursor-help">effects</span>
+                <span className="tooltip-content">0.0-0.3: Conservative, predictable | 0.4-0.6: Balanced | 0.7-1.0: Creative, varied, spontaneous</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                id="temp"
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={temperature}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTemperature(parseFloat(e.target.value))}
+                className="w-full glow-range"
+                aria-valuemin={0}
+                aria-valuemax={1}
+                aria-valuenow={Number.isFinite(temperature) ? Number(temperature.toFixed(2)) : 0.7}
+              />
+              <span className="text-xs tabular-nums opacity-80 w-10 text-right">{temperature.toFixed(2)}</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid content-start gap-3 sm:gap-4 lg:col-span-2">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={handleGenerate}
+              disabled={loading || humanizing || !config.input}
+              aria-busy={loading}
+              aria-controls="reply-output"
+              className="glass neon-hover border px-4 sm:px-5 py-2 text-xs uppercase tracking-wider disabled:opacity-50 border-[var(--accent)] text-[var(--accent)] flex-shrink-0"
+            >
+              {loading ? (
+                <span>
+                  GENERATING<span className="loading-dots" aria-hidden="true"></span>
+                </span>
+              ) : (
+                "GENERATE"
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={handleHumanize}
+              disabled={humanizing || loading || !output}
+              aria-busy={humanizing}
+              className="glass neon-hover border border-white/30 px-3 sm:px-4 py-2 text-xs uppercase tracking-wider disabled:opacity-50 flex-shrink-0"
+            >
+              {humanizing ? (
+                <span>
+                  HUMANIZING<span className="loading-dots" aria-hidden="true"></span>
+                </span>
+              ) : (
+                "HUMANIZE"
+              )}
+            </button>
+            {error ? (
+              <span role="alert" aria-live="assertive" className="text-xs text-red-400 uppercase tracking-wide break-words">{error}</span>
+            ) : null}
+          </div>
+
+          {output ? (
+            <section id="reply-output" className="terminal glass neon-hover p-3 sm:p-4 flicker" aria-live="polite">
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-[10px] uppercase opacity-75">OUTPUT</div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    disabled={!output}
+                    className="glass neon-hover border border-white/30 px-2 py-1 text-[10px] uppercase tracking-widest disabled:opacity-50 flex-shrink-0"
+                    aria-label="Copy output to clipboard"
+                  >
+                    {copied ? "COPIED" : "COPY"}
+                  </button>
+                </div>
+              </div>
+              <div className="whitespace-pre-wrap leading-relaxed typewriter break-words overflow-hidden">{output}</div>
+            </section>
+          ) : null}
+        </section>
+      </div>
+    </main>
   );
 }
