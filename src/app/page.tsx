@@ -47,12 +47,15 @@ export default function Home() {
       if (t(config.persona)) payload.persona = t(config.persona);
       if (t(config.goal)) payload.goal = t(config.goal);
       if (t(config.topic)) payload.topic = t(config.topic);
-      // Add a system nudge to humanize
+      // Add a system nudge to humanize with mobile keyboard style
       payload.system = [
-        "Humanize the text to sound natural, conversational, and authentic.",
-        "Keep original meaning; improve readability; vary sentence length; use light contractions where appropriate.",
-        "Avoid AI-ish hedging or over-explanation; keep it concise and personable.",
-        "Output only the rewritten text; no preambles."
+        "Make this sound like it was typed on a mobile keyboard by a real person.",
+        "Remove formal punctuation - minimal commas, periods, semicolons.",
+        "Use natural mobile typing patterns: contractions, lowercase starts, casual flow.",
+        "Add subtle imperfections like missing apostrophes, run-on sentences, natural pauses.",
+        "Make it feel spontaneous and conversational, not polished or AI-generated.",
+        "Keep the core meaning but make it sound authentically human-typed.",
+        "Output only the humanized text."
       ].join(" ");
 
       const res = await fetch("/api/generate", {

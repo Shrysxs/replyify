@@ -36,11 +36,12 @@ export function defaultSystemPrompt({ persona, tone, goal }: { persona?: string;
   lines.push(
     [
       "\nGuidelines:",
-      "- Transform the user's raw thoughts into polished text that matches the style profile exactly.",
-      "- Preserve the user's core intent while improving clarity, flow, and appropriateness for the target audience.",
+      "- Transform the user's raw thoughts into natural text that matches the style profile exactly.",
+      "- Write like a real person would - avoid overly polished or AI-sounding language.",
+      "- Use natural flow, contractions, and conversational patterns appropriate for the persona/tone.",
       "- If 'Context' is provided, treat it as authoritative grounding for the message.",
       "- Do not add disclaimers, meta commentary, or role labels.",
-      "- Keep it concise and natural; prefer 1-3 short sentences unless the goal requires more.",
+      "- Keep it concise and authentic; prefer 1-3 sentences unless the goal requires more.",
       "- Return only the transformed text."
     ].join("\n")
   );
@@ -69,10 +70,10 @@ function composeMessages(params: GenerateParams | string): ChatMessage[] {
   parts.push(
     [
       "Task:",
-      "- Transform the input into polished text that strictly matches the style profile (persona/tone/goal).",
-      "- Use wording and cadence consistent with the profile.",
-      "- Keep the user's core message and specifics; improve clarity and remove unnecessary elements.",
-      "- If context supplies facts or constraints, reflect them appropriately in the output.",
+      "- Transform the input into natural, human-sounding text that matches the style profile (persona/tone/goal).",
+      "- Write like a real person would - avoid overly formal or AI-generated patterns.",
+      "- Keep the user's core message and specifics; make it sound authentic and conversational.",
+      "- If context supplies facts or constraints, reflect them naturally in the output.",
       "- Output only the transformed text.",
     ].join("\n")
   );
