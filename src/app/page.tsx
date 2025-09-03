@@ -211,7 +211,7 @@ export default function Home() {
                 max={1}
                 step={0.05}
                 value={temperature}
-                onChange={(e) => setTemperature(parseFloat(e.target.value))}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTemperature(parseFloat(e.target.value))}
                 className="w-full glow-range"
                 aria-valuemin={0}
                 aria-valuemax={1}
