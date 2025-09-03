@@ -6,11 +6,12 @@ type ChipProps = {
   selected?: boolean;
   onClick?: () => void;
   className?: string;
-};
+} & React.HTMLAttributes<HTMLButtonElement>;
 
-export function Chip({ label, selected, onClick, className }: ChipProps) {
+export function Chip({ label, selected, onClick, className, ...rest }: ChipProps) {
   return (
     <button
+      {...rest}
       type="button"
       onClick={onClick}
       aria-pressed={selected}

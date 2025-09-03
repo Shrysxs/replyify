@@ -48,8 +48,16 @@ declare module 'react' {
     type: string;
   }
   
+  interface HTMLAttributes<T = HTMLElement> {
+    key?: string | number | null;
+  }
+  
+  interface DetailedHTMLProps<E, T = HTMLElement> extends E {
+    key?: string | number | null;
+  }
+  
   namespace React {
-    export { useState, useRef, ChangeEvent, SyntheticEvent, Dispatch, SetStateAction, MutableRefObject, RefObject };
+    export { useState, useRef, ChangeEvent, SyntheticEvent, Dispatch, SetStateAction, MutableRefObject, RefObject, HTMLAttributes, DetailedHTMLProps };
   }
 }
 

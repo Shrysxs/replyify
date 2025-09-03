@@ -22,7 +22,7 @@ export function GET() {
       >
         <div
           style={{
-            display: "inline-flex",
+            display: "flex",
             border: "2px solid #00ff00",
             color: "#00ff00",
             padding: "8px 14px",
@@ -32,13 +32,12 @@ export function GET() {
         >
           REPLYIFY
         </div>
-        <div style={{ height: 24 }} />
-        <div style={{ fontSize: 60, lineHeight: 1.1, fontWeight: 700 }}>
-          Turn any message into a concise,
-          <br /> on‑brand reply—fast.
+        <div style={{ display: "flex", height: 24 }} />
+        <div style={{ display: "flex", fontSize: 60, lineHeight: 1.1, fontWeight: 700 }}>
+          Turn any message into a concise, on‑brand reply—fast.
         </div>
-        <div style={{ height: 24 }} />
-        <div style={{ fontSize: 24, opacity: 0.9 }}>replyify.app</div>
+        <div style={{ display: "flex", height: 24 }} />
+        <div style={{ display: "flex", fontSize: 24, opacity: 0.9 }}>replyify.app</div>
       </div>
     ),
     { width, height }
