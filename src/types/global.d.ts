@@ -1,7 +1,7 @@
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      [elemName: string]: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
     }
   }
 }
@@ -53,7 +53,7 @@ declare module 'react' {
   }
 }
 
-declare var process: {
+declare const process: {
   env: {
     [key: string]: string | undefined;
     NODE_ENV: 'development' | 'production' | 'test';
