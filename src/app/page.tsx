@@ -206,8 +206,8 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <label htmlFor="temp" className="text-xs uppercase tracking-widest opacity-90">Temperature</label>
               <div className="tooltip text-[11px] opacity-80">
-                <span className="underline decoration-dotted cursor-help">hint</span>
-                <span className="tooltip-content">Lower = focused | Higher = creative</span>
+                <span className="underline decoration-dotted cursor-help">effects</span>
+                <span className="tooltip-content">0.0-0.3: Conservative, predictable | 0.4-0.6: Balanced | 0.7-1.0: Creative, varied, spontaneous</span>
               </div>
             </div>
             <div className="flex items-center gap-3">

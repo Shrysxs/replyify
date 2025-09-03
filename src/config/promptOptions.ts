@@ -54,36 +54,36 @@ export const topics = [
 // Rich, compact guides that the prompt engine can use to enforce option-specific style.
 // Keep descriptions short to minimize tokens while providing clear stylistic targets.
 export const personaGuides: Record<string, string> = {
-  "friend": "warm, informal, uses simple language, 1-2 short sentences, no jargon",
-  "customer": "respectful, professional, acknowledges concerns, proposes a next step",
-  "investor": "succinct, metrics-oriented, confident but measured, avoid hype",
-  "hiring-manager": "clear, outcome-focused, highlights accountability and timelines",
-  "classmate": "casual, collaborative, suggests study/action items",
-  "audience-general": "plain language, inclusive, avoids niche jargon",
+  "friend": "warm, informal, uses simple language, match input length exactly, no jargon",
+  "customer": "respectful, professional, acknowledges concerns, proportional length to input",
+  "investor": "succinct, metrics-oriented, confident but measured, avoid hype, brief responses",
+  "hiring-manager": "clear, outcome-focused, highlights accountability, match input brevity",
+  "classmate": "casual, collaborative, suggests study/action items, keep it short like input",
+  "audience-general": "plain language, inclusive, avoids niche jargon, proportional to input length",
 };
 
 export const toneGuides: Record<string, string> = {
-  "witty": "light wordplay, clever but not snarky, avoid sarcasm that could misread",
-  "contrarian": "challenge assumptions politely, present 1-2 counterpoints with evidence",
-  "formal": "complete sentences, precise vocabulary, no emojis, respectful register",
-  "casual": "conversational, contractions ok, friendly, may use emoji sparingly",
-  "playful": "upbeat, energetic, tasteful humor, keep it concise",
-  "empathetic": "acknowledge feelings, validate, supportive phrasing",
-  "assertive": "direct, confident, clear asks, no hedging",
-  "minimal": "ultra concise, only essentials, no filler",
-  "wise": "measured, reflective, principle-driven phrasing",
+  "witty": "light wordplay, clever but not snarky, match input length, avoid sarcasm",
+  "contrarian": "challenge assumptions politely, brief counterpoints, proportional to input",
+  "formal": "complete sentences, precise vocabulary, no emojis, match input length",
+  "casual": "conversational, contractions ok, friendly, keep length proportional to input",
+  "playful": "upbeat, energetic, tasteful humor, stay concise like input",
+  "empathetic": "acknowledge feelings, validate, supportive phrasing, match input brevity",
+  "assertive": "direct, confident, clear asks, no hedging, proportional length",
+  "minimal": "ultra concise, only essentials, no filler, extremely brief",
+  "wise": "measured, reflective, principle-driven phrasing, match input length",
 };
 
 export const goalGuides: Record<string, string> = {
-  "clarify": "ask a precise question or restate in simpler terms",
-  "persuade": "state position, give 1-2 reasons/evidence, end with a clear call-to-action",
-  "support": "offer encouragement and a specific resource or next step",
-  "disagree-politely": "acknowledge point, state disagreement with reason, invite dialogue",
-  "apologize": "own the mistake, state fix, avoid excuses",
-  "ask-for-help": "state need, provide context, specify the ask",
-  "follow-up": "reference prior touchpoint, summarize, propose next step/time",
-  "close-deal": "summarize value, address last objection, propose concrete close step",
-  "network": "brief intro, clear purpose, low-friction ask",
+  "clarify": "ask a precise question or restate in simpler terms, keep it brief",
+  "persuade": "state position, give 1-2 reasons, clear call-to-action, match input length",
+  "support": "offer encouragement and specific resource, proportional to input length",
+  "disagree-politely": "acknowledge point, state disagreement with reason, keep it concise",
+  "apologize": "own the mistake, state fix, avoid excuses, match input brevity",
+  "ask-for-help": "state need, provide context, specify the ask, proportional length",
+  "follow-up": "reference prior touchpoint, summarize, propose next step, keep it brief",
+  "close-deal": "summarize value, address objection, concrete close step, match input length",
+  "network": "brief intro, clear purpose, low-friction ask, stay concise",
 };
 
 export function summarizeStyle(persona?: string, tone?: string, goal?: string) {

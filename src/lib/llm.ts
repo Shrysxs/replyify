@@ -37,11 +37,13 @@ export function defaultSystemPrompt({ persona, tone, goal }: { persona?: string;
     [
       "\nGuidelines:",
       "- Transform the user's raw thoughts into natural text that matches the style profile exactly.",
+      "- Match the LENGTH of the input - short input = short output, longer input = proportionally longer output.",
+      "- STRICTLY embody the selected persona, tone, and goal - don't deviate from these choices.",
       "- Write like a real person would - avoid overly polished or AI-sounding language.",
       "- Use natural flow, contractions, and conversational patterns appropriate for the persona/tone.",
+      "- TEMPERATURE EFFECTS: Lower temp (0.0-0.3) = more predictable, focused, conservative word choices. Higher temp (0.7-1.0) = more creative, varied, spontaneous expressions.",
       "- If 'Context' is provided, treat it as authoritative grounding for the message.",
       "- Do not add disclaimers, meta commentary, or role labels.",
-      "- Keep it concise and authentic; prefer 1-3 sentences unless the goal requires more.",
       "- Return only the transformed text."
     ].join("\n")
   );
@@ -70,7 +72,10 @@ function composeMessages(params: GenerateParams | string): ChatMessage[] {
   parts.push(
     [
       "Task:",
-      "- Transform the input into natural, human-sounding text that matches the style profile (persona/tone/goal).",
+      "- Transform the input into natural, human-sounding text that STRICTLY matches the style profile (persona/tone/goal).",
+      "- Keep output length proportional to input length - don't expand a simple message into an essay.",
+      "- EXACTLY embody the selected persona, tone, and goal - these are non-negotiable requirements.",
+      "- Apply temperature setting: LOW temp = safe, predictable phrasing. HIGH temp = creative, varied, unexpected word choices.",
       "- Write like a real person would - avoid overly formal or AI-generated patterns.",
       "- Keep the user's core message and specifics; make it sound authentic and conversational.",
       "- If context supplies facts or constraints, reflect them naturally in the output.",
