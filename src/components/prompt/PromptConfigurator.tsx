@@ -32,12 +32,12 @@ export default function PromptConfigurator({ value, onChange }: Props) {
       />
 
       <div className="grid gap-2 glass neon-hover p-4">
-        <div id="msg-label" className="text-[10px] uppercase tracking-widest opacity-90 retro">MESSAGE OR CONTEXT</div>
+        <div id="msg-label" className="text-[10px] uppercase tracking-widest opacity-90 retro">YOUR THOUGHTS OR IDEAS</div>
         <textarea
           value={value.input}
           onChange={(e) => onChange({ ...value, input: e.target.value })}
-          placeholder="Paste the message you&apos;re replying to, or add context…"
-          aria-label="Message or context to reply to"
+          placeholder="Write what's on your mind or what you want to convey…"
+          aria-label="Your thoughts or ideas to transform"
           aria-describedby="msg-label"
           className="w-full min-h-[160px] border border-white/20 bg-transparent p-3 rounded-md outline-none focus:border-[var(--accent)] focus:shadow-[0_0_12px_rgba(0,255,120,0.25)] transition"
         />

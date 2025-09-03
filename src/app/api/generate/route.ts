@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { generateReply } from "@/lib/llm";
+import { generateText } from "@/lib/llm";
 import { apiCache, stableKey } from "@/lib/cache";
 
 // Ensure Node runtime and avoid caching.
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ text: cached, cached: true }, { status: 200 });
     }
 
-    const output = await generateReply({
+    const output = await generateText({
       input,
       tone: toStr(tone),
       persona: toStr(persona),

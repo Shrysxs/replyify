@@ -123,7 +123,7 @@ export default function Home() {
       });
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(typeof data?.error === "string" ? data.error : "Failed to generate reply");
+        throw new Error(typeof data?.error === "string" ? data.error : "Failed to generate text");
       }
       setOutput(typeof data?.text === "string" ? data.text : JSON.stringify(data));
     } catch (e) {
@@ -171,7 +171,7 @@ export default function Home() {
           </a>
         </div>
         <p className="text-xs opacity-70 uppercase tracking-wide">
-          Turn any message into a concise, on‑brand reply—fast.
+          Transform your thoughts into polished, context-aware text—fast.
         </p>
       </header>
 

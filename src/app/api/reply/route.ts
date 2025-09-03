@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { generateReply } from "@/lib/llm";
+import { generateText } from "@/lib/llm";
 import { apiCache, stableKey } from "@/lib/cache";
 
 export const runtime = "nodejs";
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
       return withCors(NextResponse.json({ text: cached, cached: true }, { status: 200 }));
     }
 
-    const text = await generateReply({ input, context: toStr(context), system: toStr(system), model: toStr(model), temperature, maxTokens, stop });
+    const text = await generateText({ input, context: toStr(context), system: toStr(system), model: toStr(model), temperature, maxTokens, stop });
 
     if (text) apiCache.set(cacheKey, text);
 
