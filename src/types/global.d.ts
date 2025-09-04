@@ -48,11 +48,11 @@ declare module 'react' {
     type: string;
   }
   
-  interface HTMLAttributes<T = HTMLElement> {
+  interface HTMLAttributes<T extends HTMLElement = HTMLElement> {
     key?: string | number | null;
   }
   
-  interface DetailedHTMLProps<E, T = HTMLElement> extends E {
+  interface DetailedHTMLProps<E, T extends HTMLElement = HTMLElement> extends E {
     key?: string | number | null;
   }
   
