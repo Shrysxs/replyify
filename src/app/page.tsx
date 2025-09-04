@@ -238,15 +238,14 @@ export default function Home() {
                 </p>
               </motion.div>
 
-              {/* Content grid; single scroll container, wider columns */}
-              <div className="flex-1 min-h-0 py-6 lg:py-8 grid gap-6 lg:gap-8 lg:[grid-template-columns:1.25fr_1fr]">
-
+              {/* Single column layout */}
+              <div className="flex-1 min-h-0 py-6 lg:py-8 max-w-4xl mx-auto">
             <motion.section
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="space-y-6"
+              className="space-y-6 mb-8"
             >
               <PromptConfigurator
                 value={config}
@@ -293,25 +292,26 @@ export default function Home() {
                   </span>
                 </div>
               </motion.div>
-            </motion.section>
-
-            <motion.section
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
+              
               {/* Action Buttons */}
-              <div className="border border-white/10 rounded-2xl p-6 bg-transparent">
-                <div className="flex flex-wrap items-center gap-4 mb-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="border border-white/10 rounded-2xl p-6 bg-transparent"
+              >
+                <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
+                  <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">Actions</div>
+                </div>
+                <div className="flex flex-wrap items-center justify-center gap-4">
                   <button
                     type="button"
                     onClick={handleGenerate}
                     disabled={loading || humanizing || !config.input}
                     aria-busy={loading}
                     aria-controls="reply-output"
-                    className="group inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-full border border-white/15 text-[var(--foreground)] hover:text-black hover:bg-[var(--accent)]/90 hover:border-[var(--accent)]/60 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed will-change-transform hover:-translate-y-0.5"
+                    className="group inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-full border border-white/15 text-[var(--foreground)] hover:text-black hover:bg-[var(--accent)]/90 hover:border-[var(--accent)]/60 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span className="inline-flex items-center">
                       {loading ? (
@@ -321,25 +321,19 @@ export default function Home() {
                       ) : (
                         <>
                           Generate
-                          <svg
-                            className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
+                          <svg className="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
                         </>
                       )}
                     </span>
                   </button>
-                  
                   <button
                     type="button"
                     onClick={handleHumanize}
                     disabled={humanizing || loading || !output}
                     aria-busy={humanizing}
-                    className="px-6 py-3 text-sm rounded-full border border-white/15 hover:border-[var(--accent)]/60 hover:bg-white/5 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-300 hover:text-neutral-100 flex-shrink-0 will-change-transform hover:-translate-y-0.5"
+                    className="px-6 py-3 text-sm rounded-full border border-white/15 hover:border-[var(--accent)]/60 hover:bg-white/5 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-300 hover:text-neutral-100"
                   >
                     {humanizing ? (
                       <span>
@@ -350,48 +344,36 @@ export default function Home() {
                     )}
                   </button>
                 </div>
-                
-                {error && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
-                    role="alert"
-                    aria-live="assertive"
-                  >
-                    {error}
-                  </motion.div>
-                )}
-              </div>
-
-              {/* Output Section */}
-              {output && (
-                <motion.section
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  id="reply-output"
-                  className="border border-white/10 rounded-2xl p-6 bg-transparent"
-                  aria-live="polite"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">Output</div>
-                    <button
-                      type="button"
-                      onClick={handleCopy}
-                      disabled={!output}
-                      className="px-4 py-2 text-xs rounded-full border border-white/15 hover:border-[var(--accent)]/60 hover:bg-white/5 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-300 hover:text-neutral-100 will-change-transform hover:-translate-y-0.5"
-                      aria-label="Copy output to clipboard"
-                    >
-                      {copied ? "Copied" : "Copy"}
-                    </button>
-                  </div>
-                  <div className="whitespace-pre-wrap leading-relaxed text-neutral-200 font-mono text-sm break-words overflow-hidden">
-                    {output}
-                  </div>
-                </motion.section>
-              )}
+              </motion.div>
             </motion.section>
+
+            {/* Output Section */}
+            {output && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                id="reply-output"
+                className="border border-white/10 rounded-2xl p-6 bg-transparent mt-8"
+                aria-live="polite"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">Output</div>
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    disabled={!output}
+                    className="px-4 py-2 text-xs rounded-full border border-white/15 hover:border-[var(--accent)]/60 hover:bg-white/5 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-300 hover:text-neutral-100 will-change-transform hover:-translate-y-0.5"
+                    aria-label="Copy output to clipboard"
+                  >
+                    {copied ? "Copied" : "Copy"}
+                  </button>
+                </div>
+                <div className="whitespace-pre-wrap leading-relaxed text-neutral-200 font-mono text-sm break-words overflow-hidden">
+                  {output}
+                </div>
+              </motion.section>
+            )}
               </div>
             </div>
           </main>
