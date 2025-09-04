@@ -91,7 +91,13 @@ export default function PromptConfigurator({ value, onChange }: Props) {
       >
         <button
           type="button"
-          onClick={() => onChange({ persona: "", tone: "", goal: "", topic: "", input: "" })}
+          onClick={() => onChange({
+            persona: personas[0] || "",
+            tone: tones[0] || "",
+            goal: goals[0] || "",
+            topic: "",
+            input: "",
+          })}
           className="border border-white/15 px-4 py-2 text-xs rounded-full transition-colors duration-200 text-neutral-300 hover:text-neutral-100 hover:border-[var(--accent)]/50"
         >
           Clear all

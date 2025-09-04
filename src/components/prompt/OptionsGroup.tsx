@@ -29,7 +29,8 @@ export default function OptionsGroup({ title, options, value, onChange }: Props)
                 label={opt}
                 selected={isSelected}
                 onClick={() => {
-                  onChange(isSelected ? "" : opt);
+                  // Enforce single, required selection: do not allow clearing to empty.
+                  if (!isSelected) onChange(opt);
                 }}
               />
             </motion.div>

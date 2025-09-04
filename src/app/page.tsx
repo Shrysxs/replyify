@@ -3,6 +3,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import PromptConfigurator from "@/components/prompt/PromptConfigurator";
 import type { PromptConfig } from "@/config/promptOptions";
+import { personas, tones, goals } from "@/config/promptOptions";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import HeroSection from "@/components/ui/HeroSection";
 import HowItWorksSection from "@/components/ui/HowItWorksSection";
@@ -10,9 +11,9 @@ import Footer from "@/components/ui/Footer";
 
 export default function Home() {
   const [config, setConfig] = React.useState<PromptConfig>({
-    persona: "",
-    tone: "",
-    goal: "",
+    persona: personas[0] || "",
+    tone: tones[0] || "",
+    goal: goals[0] || "",
     topic: "",
     input: "",
   });
@@ -145,12 +146,21 @@ export default function Home() {
     appRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const [scrolled, setScrolled] = React.useState(false);
+  // @ts-ignore - react types noise in this env; React.useEffect is available at runtime
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div>
       <AnimatedBackground />
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-white/10">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${scrolled ? "backdrop-blur-md bg-black/30 border-b border-white/10" : "bg-transparent border-b border-transparent"}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <motion.div
@@ -158,7 +168,7 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-lg font-semibold tracking-tight text-neutral-200">Replyify</h1>
+              <h1 className="text-lg font-semibold tracking-tight text-neutral-200">REPLYIFY</h1>
             </motion.div>
             
             <div className="flex items-center gap-3">
