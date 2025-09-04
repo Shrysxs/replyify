@@ -1,7 +1,12 @@
 "use client";
 import * as React from "react";
+import { motion } from "framer-motion";
 import PromptConfigurator from "@/components/prompt/PromptConfigurator";
 import type { PromptConfig } from "@/config/promptOptions";
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
+import HeroSection from "@/components/ui/HeroSection";
+import HowItWorksSection from "@/components/ui/HowItWorksSection";
+import Footer from "@/components/ui/Footer";
 
 export default function Home() {
   const [config, setConfig] = React.useState<PromptConfig>({
@@ -134,154 +139,229 @@ export default function Home() {
     }
   }
 
+  const appRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollToApp = () => {
+    appRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <main className="mx-auto max-w-6xl p-4 sm:p-6 grid gap-4 sm:gap-6 min-h-screen">
-      {/* Header with X logo in top right */}
-      <header className="grid gap-2">
-        <div className="flex items-center justify-between gap-3">
-          <h1 className="retro text-3xl uppercase tracking-widest">REPLYIFY</h1>
-          <a
-            href="https://x.com/Shrysxs"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open X profile @Shrysxs"
-            className="no-underline opacity-90 hover:opacity-100 transition-opacity"
-            style={{ color: "var(--foreground)" }}
-          >
-            <div className="glass neon-hover rounded-full p-2 border border-white/20 flex items-center justify-center">
+    <div>
+      <AnimatedBackground />
+      
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/20 border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="retro text-xl uppercase tracking-widest text-neutral-200">REPLYIFY</h1>
+            </motion.div>
+            
+            <motion.a
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              href="https://x.com/Shrysxs"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open X profile @Shrysxs"
+              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-full p-2 hover:bg-white/10 hover:border-green-400/30 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,120,0.2)]"
+            >
               <svg
                 width="18"
                 height="18"
                 viewBox="0 0 1200 1227"
                 xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-                className="block"
+                className="text-neutral-300"
+                fill="currentColor"
               >
-                <path
-                  fill="currentColor"
-                  d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-                />
+                <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" />
               </svg>
-              <span className="sr-only">X</span>
-            </div>
-          </a>
+            </motion.a>
+          </div>
         </div>
-        <p className="text-xs opacity-70 uppercase tracking-wide">
-          Transform your thoughts into polished, context-aware text—fast.
-        </p>
-      </header>
+      </nav>
 
-      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
-        <section aria-labelledby="how-it-works-title" className="grid gap-2 glass neon-hover p-3 sm:p-4">
-          <h2 id="how-it-works-title" className="text-sm uppercase tracking-widest opacity-90 retro">
-            How it works
-          </h2>
-          <ol className="grid gap-2 text-[13px] leading-relaxed list-decimal pl-5">
-            <li>
-              Write what&apos;s on your mind or what you want to convey.
-            </li>
-            <li>
-              Pick a persona, tone, and goal to match your brand and intent.
-            </li>
-            <li>
-              Generate and refine.
-            </li>
-          </ol>
-        </section>
+      {/* Hero Section */}
+      <HeroSection onStartWriting={scrollToApp} />
+      
+      {/* How It Works Section */}
+      <HowItWorksSection />
 
-        <section className="grid gap-3 sm:gap-4">
-          <PromptConfigurator
-            value={config}
-            onChange={setConfig}
-          />
-          {/* Temperature Slider */}
-          <div className="grid gap-2 glass neon-hover p-3 sm:p-4">
-            <div className="flex items-center justify-between">
-              <label htmlFor="temp" className="text-xs uppercase tracking-widest opacity-90">Temperature</label>
-              <div className="tooltip text-[11px] opacity-80">
-                <span className="underline decoration-dotted cursor-help">effects</span>
-                <span className="tooltip-content">0.0-0.3: Conservative, predictable | 0.4-0.6: Balanced | 0.7-1.0: Creative, varied, spontaneous</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <input
-                id="temp"
-                type="range"
-                min={0}
-                max={1}
-                step={0.05}
-                value={temperature}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTemperature(parseFloat(e.target.value))}
-                className="w-full glow-range"
-                aria-valuemin={0}
-                aria-valuemax={1}
-                aria-valuenow={Number.isFinite(temperature) ? Number(temperature.toFixed(2)) : 0.7}
+      {/* Main App Section */}
+      <main ref={appRef} className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-neutral-200 mb-4 retro uppercase tracking-wider">
+              Start Creating
+            </h2>
+            <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+              Configure your preferences and generate context-aware text that matches your style
+            </p>
+          </motion.div>
+
+          <div className="grid gap-8 lg:grid-cols-2">
+
+            <motion.section
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <PromptConfigurator
+                value={config}
+                onChange={setConfig}
               />
-              <span className="text-xs tabular-nums opacity-80 w-10 text-right">{temperature.toFixed(2)}</span>
-            </div>
-          </div>
-        </section>
+              
+              {/* Temperature Slider */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8 hover:border-green-400/30 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <label htmlFor="temp" className="text-sm uppercase tracking-widest text-neutral-300 font-medium retro">
+                    Temperature
+                  </label>
+                  <div className="tooltip text-xs text-neutral-400">
+                    <span className="underline decoration-dotted cursor-help hover:text-green-400 transition-colors">
+                      effects
+                    </span>
+                    <span className="tooltip-content">
+                      0.0-0.3: Conservative, predictable | 0.4-0.6: Balanced | 0.7-1.0: Creative, varied, spontaneous
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <input
+                    id="temp"
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={0.05}
+                    value={temperature}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTemperature(parseFloat(e.target.value))}
+                    className="flex-1 glow-range"
+                    aria-valuemin={0}
+                    aria-valuemax={1}
+                    aria-valuenow={Number.isFinite(temperature) ? Number(temperature.toFixed(2)) : 0.7}
+                  />
+                  <span className="text-sm tabular-nums text-green-400 font-mono w-12 text-right">
+                    {temperature.toFixed(2)}
+                  </span>
+                </div>
+              </motion.div>
+            </motion.section>
 
-        <section className="grid content-start gap-3 sm:gap-4 lg:col-span-2">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <button
-              type="button"
-              onClick={handleGenerate}
-              disabled={loading || humanizing || !config.input}
-              aria-busy={loading}
-              aria-controls="reply-output"
-              className="glass neon-hover border px-4 sm:px-5 py-2 text-xs uppercase tracking-wider disabled:opacity-50 border-[var(--accent)] text-[var(--accent)] flex-shrink-0"
+            <motion.section
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="space-y-6"
             >
-              {loading ? (
-                <span>
-                  GENERATING<span className="loading-dots" aria-hidden="true"></span>
-                </span>
-              ) : (
-                "GENERATE"
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={handleHumanize}
-              disabled={humanizing || loading || !output}
-              aria-busy={humanizing}
-              className="glass neon-hover border border-white/30 px-3 sm:px-4 py-2 text-xs uppercase tracking-wider disabled:opacity-50 flex-shrink-0"
-            >
-              {humanizing ? (
-                <span>
-                  HUMANIZING<span className="loading-dots" aria-hidden="true"></span>
-                </span>
-              ) : (
-                "HUMANIZE"
-              )}
-            </button>
-            {error ? (
-              <span role="alert" aria-live="assertive" className="text-xs text-red-400 uppercase tracking-wide break-words">{error}</span>
-            ) : null}
-          </div>
-
-          {output ? (
-            <section id="reply-output" className="terminal glass neon-hover p-3 sm:p-4 flicker" aria-live="polite">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-[10px] uppercase opacity-75">OUTPUT</div>
-                <div className="flex items-center gap-2">
+              {/* Action Buttons */}
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
+                <div className="flex flex-wrap items-center gap-4 mb-4">
                   <button
                     type="button"
-                    onClick={handleCopy}
-                    disabled={!output}
-                    className="glass neon-hover border border-white/30 px-2 py-1 text-[10px] uppercase tracking-widest disabled:opacity-50 flex-shrink-0"
-                    aria-label="Copy output to clipboard"
+                    onClick={handleGenerate}
+                    disabled={loading || humanizing || !config.input}
+                    aria-busy={loading}
+                    aria-controls="reply-output"
+                    className="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-black bg-gradient-to-r from-green-400 to-green-500 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(0,255,120,0.4)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none flex-shrink-0"
                   >
-                    {copied ? "COPIED" : "COPY"}
+                    <span className="relative z-10 uppercase tracking-wide">
+                      {loading ? (
+                        <span>
+                          GENERATING<span className="loading-dots" aria-hidden="true"></span>
+                        </span>
+                      ) : (
+                        "GENERATE"
+                      )}
+                    </span>
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400 to-green-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={handleHumanize}
+                    disabled={humanizing || loading || !output}
+                    aria-busy={humanizing}
+                    className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-green-400/50 px-6 py-3 text-sm uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed rounded-full transition-all duration-300 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(0,255,120,0.2)] text-neutral-300 hover:text-white flex-shrink-0"
+                  >
+                    {humanizing ? (
+                      <span>
+                        HUMANIZING<span className="loading-dots" aria-hidden="true"></span>
+                      </span>
+                    ) : (
+                      "HUMANIZE"
+                    )}
                   </button>
                 </div>
+                
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
+                    role="alert"
+                    aria-live="assertive"
+                  >
+                    {error}
+                  </motion.div>
+                )}
               </div>
-              <div className="whitespace-pre-wrap leading-relaxed typewriter break-words overflow-hidden">{output}</div>
-            </section>
-          ) : null}
-        </section>
-      </div>
-    </main>
+
+              {/* Output Section */}
+              {output && (
+                <motion.section
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  id="reply-output"
+                  className="backdrop-blur-xl bg-black/40 border border-white/10 rounded-2xl p-6 hover:border-green-400/30 transition-all duration-300"
+                  aria-live="polite"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="text-sm uppercase tracking-widest text-green-400 font-medium retro">
+                      OUTPUT
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleCopy}
+                      disabled={!output}
+                      className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-green-400/50 px-4 py-2 text-xs uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed rounded-full transition-all duration-300 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(0,255,120,0.2)] text-neutral-300 hover:text-white"
+                      aria-label="Copy output to clipboard"
+                    >
+                      {copied ? "COPIED" : "COPY"}
+                    </button>
+                  </div>
+                  <div className="whitespace-pre-wrap leading-relaxed text-neutral-200 font-mono text-sm break-words overflow-hidden">
+                    {output}
+                  </div>
+                </motion.section>
+              )}
+            </motion.section>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }

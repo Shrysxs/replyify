@@ -11,11 +11,11 @@ const vt323 = VT323({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-  title: {
-    default: "Replyify",
-    template: "%s · Replyify",
-  },
-  description: "Turn any message into a concise, on‑brand reply—fast.",
+  title: "Replyify - Context-Aware Text Generation",
+  description: "Polish your thoughts into context-aware replies instantly. Generate professional, personalized text with AI-powered persona, tone, and goal customization.",
+  keywords: ["AI text generation", "context-aware replies", "professional writing", "text polishing", "AI writing assistant"],
+  authors: [{ name: "Shrysxs", url: "https://x.com/Shrysxs" }],
+  creator: "Shrysxs",
   applicationName: "Replyify",
   icons: {
     icon: "/favicon.ico",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    title: "Replyify",
-    description: "Turn any message into a concise, on‑brand reply—fast.",
+    title: "Replyify - Context-Aware Text Generation",
+    description: "Polish your thoughts into context-aware replies instantly. Generate professional, personalized text with AI-powered customization.",
     siteName: "Replyify",
     images: [
       { url: "/opengraph-image", width: 1200, height: 630, alt: "Replyify" },
@@ -32,9 +32,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Replyify",
-    description: "Turn any message into a concise, on‑brand reply—fast.",
+    title: "Replyify - Context-Aware Text Generation",
+    description: "Polish your thoughts into context-aware replies instantly.",
+    creator: "@Shrysxs",
     images: ["/twitter-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

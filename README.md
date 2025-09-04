@@ -1,11 +1,10 @@
-# 🎯 Replyify
+# 🎯# Replyify ✨
 
-**AI-powered context-aware text generation for any purpose**
+> **Polish your thoughts into context-aware replies — instantly.**
 
-Craft concise, on-brand content by setting persona, tone, and goal. Perfect for replies, new messages, rewrites, or tailoring content to different audiences.
+A modern SaaS application that transforms your ideas into professional, context-aware text using AI-powered customization. Built with Next.js 14, featuring a stunning glassmorphism UI and smooth animations.
 
-🚀 **[Live Demo](https://replyify-five.vercel.app)** | 🐦 **[Follow @Shrysxs on X](https://x.com/Shrysxs)**
-
+![Replyify Preview](https://via.placeholder.com/1200x630/000000/00ff78?text=Replyify+-+Modern+SaaS+Landing+Page)
 ---
 
 ## ✨ What is Replyify?
