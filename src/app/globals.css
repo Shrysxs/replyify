@@ -249,3 +249,30 @@ input[type="range"].glow-range::-moz-range-thumb {
     transform: none !important;
   }
 }
+
+/* Bottom footer glow (radial, subtle, responsive) */
+.footer-bottom-glow {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45vh;
+  pointer-events: none;
+  z-index: 0; /* content naturally stacks above */
+  mix-blend-mode: screen; /* integrate into dark bg */
+  /* Strong orange core fading to transparent toward center height (40–50%) */
+  background: radial-gradient(60% 60% at 50% 100%,
+    rgba(255, 122, 26, 0.35) 0%,
+    rgba(255, 122, 26, 0.18) 26%,
+    rgba(255, 122, 26, 0.10) 42%,
+    rgba(255, 122, 26, 0.00) 55%
+  );
+  filter: blur(12px);
+}
+
+@media (min-width: 640px) {
+  .footer-bottom-glow { height: 48vh; }
+}
+@media (min-width: 1024px) {
+  .footer-bottom-glow { height: 52vh; }
+}
