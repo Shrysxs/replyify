@@ -147,7 +147,7 @@ export default function Home() {
   };
 
   const [scrolled, setScrolled] = React.useState(false);
-  // @ts-ignore - react types noise in this env; React.useEffect is available at runtime
+  // @ts-expect-error - react types noise in this env; React.useEffect is available at runtime
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
