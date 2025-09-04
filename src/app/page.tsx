@@ -224,7 +224,13 @@ export default function Home() {
           <main className="relative px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto flex flex-col min-h-0">
               {/* Sticky toolbar for desktop to minimize scrolling */}
-              <div className="sticky top-0 z-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-black/30 supports-[backdrop-filter]:bg-black/20 backdrop-blur border-b border-white/10">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="sticky top-0 z-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-white/5 border border-white/10 rounded-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+              >
                 <div className="flex items-center justify-between gap-4">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -279,7 +285,7 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Content grid; panes scroll independently */}
               <div className="flex-1 min-h-0 py-6 lg:py-8 grid gap-6 lg:gap-8 lg:grid-cols-2">
