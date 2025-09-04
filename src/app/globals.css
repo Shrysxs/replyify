@@ -236,3 +236,16 @@ input[type="range"].glow-range::-moz-range-thumb {
   -webkit-backdrop-filter: blur(12px);
   border-radius: 14px;
 }
+
+/* Reduce motion for users preferring less animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  /* Neutralize hover lift transforms for elements we purposely animate */
+  .will-change-transform:hover {
+    transform: none !important;
+  }
+}

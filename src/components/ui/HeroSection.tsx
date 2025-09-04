@@ -18,7 +18,7 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-6"
         >
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-neutral-100 mb-4 leading-[0.95]">
+          <h1 className="font-semibold tracking-tight text-neutral-100 mb-4 leading-[0.95] text-[clamp(2.25rem,7vw,4.5rem)]">
             <span className="block">Write with context.</span>
             <span className="block text-neutral-300">Fast, on‑brand, and precise.</span>
           </h1>
@@ -28,7 +28,7 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg sm:text-xl lg:text-2xl text-neutral-300 font-light leading-relaxed max-w-3xl mx-auto"
+            className="text-neutral-300 font-light leading-relaxed max-w-3xl mx-auto text-[clamp(1rem,2.4vw,1.375rem)]"
           >
             Transform your thoughts into polished, context-aware writing — fast.
           </motion.p>

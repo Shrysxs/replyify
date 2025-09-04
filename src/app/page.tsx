@@ -215,7 +215,7 @@ export default function Home() {
       <HowItWorksSection />
 
       {/* Main App Section */}
-      <main ref={appRef} className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <main ref={appRef} className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -224,10 +224,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-100 mb-3">
+            <h2 className="font-semibold text-neutral-100 mb-3 text-[clamp(1.75rem,4.8vw,2.25rem)]">
               Start creating
             </h2>
-            <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto">
+            <p className="text-neutral-400 max-w-2xl mx-auto text-[clamp(0.95rem,2.6vw,1.125rem)]">
               Configure your preferences and generate context-aware text that matches your style
             </p>
           </motion.div>
