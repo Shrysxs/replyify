@@ -12,7 +12,7 @@ type Props = {
 
 export default function OptionsGroup({ title, options, value, onChange }: Props) {
   return (
-    <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8 hover:border-green-400/30 transition-all duration-300">
+    <div className="rounded-2xl p-6 border border-white/10 bg-transparent">
       <div className="text-sm uppercase tracking-widest text-neutral-300 font-medium retro mb-4">{title}</div>
       <div className="flex flex-wrap gap-3">
         {options.map((opt, index) => {
@@ -22,7 +22,7 @@ export default function OptionsGroup({ title, options, value, onChange }: Props)
               key={opt}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
+              transition={{ duration: 0.3, delay: index * 0.04 }}
               viewport={{ once: true }}
             >
               <Chip

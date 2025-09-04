@@ -65,31 +65,31 @@ export default function HowItWorksSection() {
               viewport={{ once: true }}
               className="relative group"
             >
-              {/* Glass Card */}
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 h-full transition-all duration-300 hover:bg-white/8 hover:border-green-400/30 hover:shadow-[0_0_30px_rgba(0,255,120,0.15)]">
+              {/* Flat Card */}
+              <div className="rounded-2xl p-8 h-full border border-white/10 bg-transparent">
                 {/* Step Number */}
-                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-green-400/20 to-green-500/20 border border-green-400/30 mb-6 group-hover:shadow-[0_0_20px_rgba(0,255,120,0.3)] transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full border border-white/15 mb-6">
                   <span className="text-2xl font-bold text-green-400 retro">
                     {step.number}
                   </span>
                 </div>
 
                 {/* Icon */}
-                <div className="text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="text-green-400 mb-4">
                   {step.icon}
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-semibold text-neutral-200 mb-3 group-hover:text-white transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-neutral-200 mb-3">
                   {step.title}
                 </h3>
-                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                <p className="text-neutral-400 leading-relaxed">
                   {step.description}
                 </p>
 
                 {/* Connecting Line (hidden on mobile) */}
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-6 lg:-right-12 w-6 lg:w-12 h-px bg-gradient-to-r from-green-400/50 to-transparent transform -translate-y-1/2" />
+                  <div className="hidden md:block absolute top-1/2 -right-6 lg:-right-12 w-6 lg:w-12 h-px bg-white/10 transform -translate-y-1/2" />
                 )}
               </div>
             </motion.div>

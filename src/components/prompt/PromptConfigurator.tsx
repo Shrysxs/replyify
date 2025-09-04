@@ -60,7 +60,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
         viewport={{ once: true }}
-        className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8 hover:border-green-400/30 transition-all duration-300"
+        className="rounded-2xl p-6 border border-white/10 bg-transparent"
       >
         <div id="msg-label" className="text-sm uppercase tracking-widest text-neutral-300 font-medium retro mb-4">
           YOUR THOUGHTS OR IDEAS
@@ -72,7 +72,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
             placeholder="Write what's on your mind or what you want to convey…"
             aria-label="Your thoughts or ideas to transform"
             aria-describedby="msg-label"
-            className="w-full min-h-[160px] border border-white/20 bg-black/20 backdrop-blur-sm p-4 rounded-xl outline-none focus:border-green-400/50 focus:shadow-[0_0_20px_rgba(0,255,120,0.15)] transition-all duration-300 text-neutral-200 placeholder:text-neutral-500 resize-none"
+            className="w-full min-h-[160px] border border-white/15 bg-transparent p-4 rounded-xl outline-none focus:ring-2 focus:ring-green-400/40 transition-colors duration-200 text-neutral-200 placeholder:text-neutral-500 resize-none"
           />
           {value.input && (
             <div className="absolute bottom-3 right-3 text-xs text-neutral-500 font-mono">
@@ -92,7 +92,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         <button
           type="button"
           onClick={() => onChange({ persona: "", tone: "", goal: "", topic: "", input: "" })}
-          className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-red-400/50 px-4 py-2 text-xs uppercase tracking-wider rounded-full transition-all duration-300 hover:bg-red-500/10 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] text-neutral-300 hover:text-red-400"
+          className="border border-white/15 px-4 py-2 text-xs uppercase tracking-wider rounded-full transition-colors duration-200 text-neutral-300 hover:text-white hover:border-white/30"
         >
           CLEAR ALL
         </button>
