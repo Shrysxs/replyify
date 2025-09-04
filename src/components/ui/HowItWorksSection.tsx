@@ -46,16 +46,16 @@ export default function HowItWorksSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-200 mb-4 retro uppercase tracking-wider">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-neutral-100 mb-3">
             How It Works
           </h2>
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto">
             Transform your ideas into polished, professional text in three simple steps
           </p>
         </motion.div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
@@ -63,24 +63,24 @@ export default function HowItWorksSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative"
             >
-              {/* Flat Card */}
-              <div className="rounded-2xl p-8 h-full border border-white/10 bg-transparent">
+              {/* Step */}
+              <div className="p-0 h-full">
                 {/* Step Number */}
-                <div className="flex items-center justify-center w-16 h-16 rounded-full border border-white/15 mb-6">
-                  <span className="text-2xl font-bold text-green-400 retro">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full border border-white/15 mb-5">
+                  <span className="text-sm font-medium text-[var(--accent)]">
                     {step.number}
                   </span>
                 </div>
 
                 {/* Icon */}
-                <div className="text-green-400 mb-4">
+                <div className="text-[var(--accent)]/90 mb-3">
                   {step.icon}
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-semibold text-neutral-200 mb-3">
+                <h3 className="text-lg font-medium text-neutral-100 mb-2">
                   {step.title}
                 </h3>
                 <p className="text-neutral-400 leading-relaxed">
@@ -89,7 +89,7 @@ export default function HowItWorksSection() {
 
                 {/* Connecting Line (hidden on mobile) */}
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-6 lg:-right-12 w-6 lg:w-12 h-px bg-white/10 transform -translate-y-1/2" />
+                  <div className="hidden md:block absolute top-6 -right-5 lg:-right-10 w-10 lg:w-16 h-px bg-white/10" />
                 )}
               </div>
             </motion.div>

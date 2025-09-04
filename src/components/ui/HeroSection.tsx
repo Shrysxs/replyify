@@ -7,8 +7,10 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onStartWriting }: HeroSectionProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Subtle starfield overlay */}
+      <div aria-hidden className="absolute inset-0 hero-stars opacity-70 pointer-events-none" />
+      <div className="max-w-5xl mx-auto text-center relative z-10">
         {/* Main Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -16,10 +18,9 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-6"
         >
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-neutral-100 mb-4">
-            <span className="block">
-              Replyify
-            </span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-neutral-100 mb-4 leading-[0.95]">
+            <span className="block">Write with context.</span>
+            <span className="block text-neutral-300">Fast, on‑brand, and precise.</span>
           </h1>
           
           {/* Tagline */}
@@ -27,9 +28,9 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-xl sm:text-2xl lg:text-3xl text-neutral-300 font-light leading-relaxed max-w-3xl mx-auto"
+            className="text-lg sm:text-xl lg:text-2xl text-neutral-300 font-light leading-relaxed max-w-3xl mx-auto"
           >
-            Polish your thoughts into context-aware replies — instantly.
+            Transform your thoughts into polished, context-aware writing — fast.
           </motion.p>
         </motion.div>
 
@@ -42,9 +43,17 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
         >
           <button
             onClick={onStartWriting}
-            className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-black rounded-full bg-[var(--accent)] transition-colors duration-200 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="group inline-flex items-center justify-center px-7 py-3 text-base font-medium rounded-full border border-white/15 text-[var(--foreground)] hover:text-black hover:bg-[var(--accent)]/90 hover:border-[var(--accent)]/60 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/40 will-change-transform hover:-translate-y-0.5"
           >
-            <span className="uppercase tracking-wide">Start Writing</span>
+            <span>Start Writing</span>
+            <svg
+              className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
           </button>
         </motion.div>
       </div>

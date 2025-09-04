@@ -5,11 +5,11 @@ export default function AnimatedBackground() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* Base background */}
-      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-[var(--background)]" />
 
       {/* Subtle static grid overlay */}
       <motion.div
-        className="absolute inset-0 opacity-15"
+        className="absolute inset-0 opacity-[0.15]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.15 }}
         transition={{ duration: 1.2, ease: "easeOut" }}

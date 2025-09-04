@@ -1,19 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { VT323 } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const vt323 = VT323({
-  variable: "--font-vt323",
-  weight: "400",
+const inter = Inter({
+  variable: "--font-ui",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-  title: "Replyify - Context-Aware Text Generation",
-  description: "Polish your thoughts into context-aware replies instantly. Generate professional, personalized text with AI-powered persona, tone, and goal customization.",
-  keywords: ["AI text generation", "context-aware replies", "professional writing", "text polishing", "AI writing assistant"],
+  title: "Replyify — Context-Aware Writing",
+  description: "Transform your thoughts into polished, context-aware writing. Generate professional, on-brand text with persona, tone, and goal controls.",
+  keywords: ["AI text generation", "context-aware writing", "professional writing", "text polishing", "AI writing assistant"],
   authors: [{ name: "Shrysxs", url: "https://x.com/Shrysxs" }],
   creator: "Shrysxs",
   applicationName: "Replyify",
@@ -23,8 +29,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    title: "Replyify - Context-Aware Text Generation",
-    description: "Polish your thoughts into context-aware replies instantly. Generate professional, personalized text with AI-powered customization.",
+    title: "Replyify — Context-Aware Writing",
+    description: "Transform your thoughts into polished, context-aware writing with AI-powered customization.",
     siteName: "Replyify",
     images: [
       { url: "/opengraph-image", width: 1200, height: 630, alt: "Replyify" },
@@ -32,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Replyify - Context-Aware Text Generation",
-    description: "Polish your thoughts into context-aware replies instantly.",
+    title: "Replyify — Context-Aware Writing",
+    description: "Transform your thoughts into polished, context-aware writing.",
     creator: "@Shrysxs",
     images: ["/twitter-image"],
   },
@@ -61,20 +67,15 @@ export default function RootLayout({
         <link rel="preconnect" href="https://api.groq.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//api.groq.com" />
       </head>
-      <body className={`${vt323.variable} antialiased min-h-screen w-full relative overflow-x-hidden bg-black`}>
-        {/* Dark Noise Colored Background */}
+      <body className={`${inter.variable} ${jetbrains.variable} antialiased min-h-screen w-full relative overflow-x-hidden`}>
+        {/* Subtle vignette backdrop */}
         <div
           className="fixed inset-0 z-0 pointer-events-none"
           aria-hidden="true"
           style={{
-            background: "#000000",
-            backgroundImage: `
-        radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
-        radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
-        radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0)
-      `,
-            backgroundSize: "20px 20px, 30px 30px, 25px 25px",
-            backgroundPosition: "0 0, 10px 10px, 15px 5px",
+            background: `radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,0.06), transparent 60%),
+                         radial-gradient(900px 400px at 20% -10%, rgba(0,207,255,0.08), transparent 55%),
+                         linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(15,15,15,0.6) 90%)`,
           }}
         />
         {/* App Content */}

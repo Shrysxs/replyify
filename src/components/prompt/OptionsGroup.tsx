@@ -12,8 +12,8 @@ type Props = {
 
 export default function OptionsGroup({ title, options, value, onChange }: Props) {
   return (
-    <div className="rounded-2xl p-6 border border-white/10 bg-transparent">
-      <div className="text-sm uppercase tracking-widest text-neutral-300 font-medium retro mb-4">{title}</div>
+    <div className="space-y-4">
+      <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium mb-1">{title}</div>
       <div className="flex flex-wrap gap-3">
         {options.map((opt, index) => {
           const isSelected = value === opt;

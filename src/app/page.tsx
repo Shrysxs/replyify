@@ -150,7 +150,7 @@ export default function Home() {
       <AnimatedBackground />
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/20 border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <motion.div
@@ -158,30 +158,42 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="retro text-xl uppercase tracking-widest text-neutral-200">REPLYIFY</h1>
+              <h1 className="text-lg font-semibold tracking-tight text-neutral-200">Replyify</h1>
             </motion.div>
             
-            <motion.a
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              href="https://x.com/Shrysxs"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open X profile @Shrysxs"
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-full p-2 hover:bg-white/10 hover:border-green-400/30 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,120,0.2)]"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 1200 1227"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-neutral-300"
-                fill="currentColor"
+            <div className="flex items-center gap-3">
+              <motion.button
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.05 }}
+                onClick={scrollToApp}
+                className="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full border border-white/15 text-[var(--foreground)] hover:text-black hover:bg-[var(--accent)]/90 hover:border-[var(--accent)]/60 transition-colors duration-200 will-change-transform hover:-translate-y-0.5"
               >
-                <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" />
-              </svg>
-            </motion.a>
+                Try Replyify
+              </motion.button>
+
+              <motion.a
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                href="https://x.com/Shrysxs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open X profile @Shrysxs"
+                className="border border-white/10 rounded-full p-2 hover:border-[var(--accent)]/50 hover:bg-white/5 transition-colors duration-200"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 1200 1227"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-neutral-300"
+                  fill="currentColor"
+                >
+                  <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" />
+                </svg>
+              </motion.a>
+            </div>
           </div>
         </div>
       </nav>
@@ -202,10 +214,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-neutral-200 mb-4 retro uppercase tracking-wider">
-              Start Creating
+            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-100 mb-3">
+              Start creating
             </h2>
-            <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto">
               Configure your preferences and generate context-aware text that matches your style
             </p>
           </motion.div>
@@ -230,14 +242,14 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8 hover:border-green-400/30 transition-all duration-300"
+                className="rounded-2xl p-6 border border-white/10 bg-transparent"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <label htmlFor="temp" className="text-sm uppercase tracking-widest text-neutral-300 font-medium retro">
+                  <label htmlFor="temp" className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
                     Temperature
                   </label>
                   <div className="tooltip text-xs text-neutral-400">
-                    <span className="underline decoration-dotted cursor-help hover:text-green-400 transition-colors">
+                    <span className="underline decoration-dotted cursor-help hover:text-[var(--accent)] transition-colors">
                       effects
                     </span>
                     <span className="tooltip-content">
@@ -259,7 +271,7 @@ export default function Home() {
                     aria-valuemax={1}
                     aria-valuenow={Number.isFinite(temperature) ? Number(temperature.toFixed(2)) : 0.7}
                   />
-                  <span className="text-sm tabular-nums text-green-400 font-mono w-12 text-right">
+                  <span className="text-sm tabular-nums text-[var(--accent)] font-mono w-12 text-right">
                     {temperature.toFixed(2)}
                   </span>
                 </div>
@@ -274,7 +286,7 @@ export default function Home() {
               className="space-y-6"
             >
               {/* Action Buttons */}
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6">
+              <div className="border border-white/10 rounded-2xl p-6 bg-transparent">
                 <div className="flex flex-wrap items-center gap-4 mb-4">
                   <button
                     type="button"
@@ -282,18 +294,27 @@ export default function Home() {
                     disabled={loading || humanizing || !config.input}
                     aria-busy={loading}
                     aria-controls="reply-output"
-                    className="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-black bg-gradient-to-r from-green-400 to-green-500 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(0,255,120,0.4)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none flex-shrink-0"
+                    className="group inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-full border border-white/15 text-[var(--foreground)] hover:text-black hover:bg-[var(--accent)]/90 hover:border-[var(--accent)]/60 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed will-change-transform hover:-translate-y-0.5"
                   >
-                    <span className="relative z-10 uppercase tracking-wide">
+                    <span className="inline-flex items-center">
                       {loading ? (
                         <span>
-                          GENERATING<span className="loading-dots" aria-hidden="true"></span>
+                          Generating<span className="loading-dots" aria-hidden="true"></span>
                         </span>
                       ) : (
-                        "GENERATE"
+                        <>
+                          Generate
+                          <svg
+                            className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                        </>
                       )}
                     </span>
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400 to-green-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
                   </button>
                   
                   <button
@@ -301,14 +322,14 @@ export default function Home() {
                     onClick={handleHumanize}
                     disabled={humanizing || loading || !output}
                     aria-busy={humanizing}
-                    className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-green-400/50 px-6 py-3 text-sm uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed rounded-full transition-all duration-300 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(0,255,120,0.2)] text-neutral-300 hover:text-white flex-shrink-0"
+                    className="px-6 py-3 text-sm rounded-full border border-white/15 hover:border-[var(--accent)]/60 hover:bg-white/5 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-300 hover:text-neutral-100 flex-shrink-0 will-change-transform hover:-translate-y-0.5"
                   >
                     {humanizing ? (
                       <span>
-                        HUMANIZING<span className="loading-dots" aria-hidden="true"></span>
+                        Humanizing<span className="loading-dots" aria-hidden="true"></span>
                       </span>
                     ) : (
-                      "HUMANIZE"
+                      "Humanize"
                     )}
                   </button>
                 </div>
@@ -333,21 +354,19 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                   id="reply-output"
-                  className="backdrop-blur-xl bg-black/40 border border-white/10 rounded-2xl p-6 hover:border-green-400/30 transition-all duration-300"
+                  className="border border-white/10 rounded-2xl p-6 bg-transparent"
                   aria-live="polite"
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <div className="text-sm uppercase tracking-widest text-green-400 font-medium retro">
-                      OUTPUT
-                    </div>
+                    <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">Output</div>
                     <button
                       type="button"
                       onClick={handleCopy}
                       disabled={!output}
-                      className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-green-400/50 px-4 py-2 text-xs uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed rounded-full transition-all duration-300 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(0,255,120,0.2)] text-neutral-300 hover:text-white"
+                      className="px-4 py-2 text-xs rounded-full border border-white/15 hover:border-[var(--accent)]/60 hover:bg-white/5 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-300 hover:text-neutral-100 will-change-transform hover:-translate-y-0.5"
                       aria-label="Copy output to clipboard"
                     >
-                      {copied ? "COPIED" : "COPY"}
+                      {copied ? "Copied" : "Copy"}
                     </button>
                   </div>
                   <div className="whitespace-pre-wrap leading-relaxed text-neutral-200 font-mono text-sm break-words overflow-hidden">

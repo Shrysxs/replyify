@@ -12,7 +12,7 @@ type Props = {
 export default function PromptConfigurator({ value, onChange }: Props) {
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -20,7 +20,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         viewport={{ once: true }}
       >
         <OptionsGroup
-          title="PERSONA / AUDIENCE"
+          title="Persona / Audience"
           options={personas}
           value={value.persona}
           onChange={(persona) => onChange({ ...value, persona })}
@@ -34,7 +34,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         viewport={{ once: true }}
       >
         <OptionsGroup
-          title="TONE"
+          title="Tone"
           options={tones}
           value={value.tone}
           onChange={(tone) => onChange({ ...value, tone })}
@@ -48,7 +48,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         viewport={{ once: true }}
       >
         <OptionsGroup
-          title="GOAL / TASK"
+          title="Goal / Task"
           options={goals}
           value={value.goal}
           onChange={(goal) => onChange({ ...value, goal })}
@@ -60,10 +60,10 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
         viewport={{ once: true }}
-        className="rounded-2xl p-6 border border-white/10 bg-transparent"
+        className="space-y-3"
       >
-        <div id="msg-label" className="text-sm uppercase tracking-widest text-neutral-300 font-medium retro mb-4">
-          YOUR THOUGHTS OR IDEAS
+        <div id="msg-label" className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
+          Your thoughts or ideas
         </div>
         <div className="relative">
           <textarea
@@ -72,7 +72,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
             placeholder="Write what's on your mind or what you want to convey…"
             aria-label="Your thoughts or ideas to transform"
             aria-describedby="msg-label"
-            className="w-full min-h-[160px] border border-white/15 bg-transparent p-4 rounded-xl outline-none focus:ring-2 focus:ring-green-400/40 transition-colors duration-200 text-neutral-200 placeholder:text-neutral-500 resize-none"
+            className="w-full min-h-[160px] border border-white/15 bg-transparent p-4 rounded-xl outline-none focus:ring-2 focus:ring-[var(--accent)]/30 transition-colors duration-200 text-neutral-200 placeholder:text-neutral-500 resize-none"
           />
           {value.input && (
             <div className="absolute bottom-3 right-3 text-xs text-neutral-500 font-mono">
@@ -92,9 +92,9 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         <button
           type="button"
           onClick={() => onChange({ persona: "", tone: "", goal: "", topic: "", input: "" })}
-          className="border border-white/15 px-4 py-2 text-xs uppercase tracking-wider rounded-full transition-colors duration-200 text-neutral-300 hover:text-white hover:border-white/30"
+          className="border border-white/15 px-4 py-2 text-xs rounded-full transition-colors duration-200 text-neutral-300 hover:text-neutral-100 hover:border-[var(--accent)]/50"
         >
-          CLEAR ALL
+          Clear all
         </button>
       </motion.div>
     </div>
