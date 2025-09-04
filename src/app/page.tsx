@@ -160,7 +160,7 @@ export default function Home() {
       <AnimatedBackground />
       
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${scrolled ? "backdrop-blur-md bg-black/30 border-b border-white/10" : "bg-transparent border-b border-transparent"}`}>
+      <nav className={`transition-colors duration-300 ${scrolled ? "backdrop-blur-md bg-black/30 border-b border-white/10" : "bg-transparent border-b border-transparent"}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <motion.div
