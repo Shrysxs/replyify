@@ -222,75 +222,24 @@ export default function Home() {
       <section ref={appRef} className="snap-section h-screen">
         <div className="viewport-scroll">
           <main className="relative px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto flex flex-col min-h-0">
-              {/* Sticky toolbar for desktop to minimize scrolling */}
+            <div className="max-w-7xl mx-auto flex flex-col min-h-0">
+              {/* Simple header (non-sticky) */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="sticky top-0 z-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-white/5 border border-white/10 rounded-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+                className="pt-8"
               >
-                <div className="flex items-center justify-between gap-4">
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <h2 className="font-semibold text-neutral-100 text-[clamp(1.5rem,3.5vw,2rem)] leading-tight">
-                      Start creating
-                    </h2>
-                    <p className="text-neutral-400 text-sm hidden md:block">
-                      Configure your preferences and generate context-aware text that matches your style
-                    </p>
-                  </motion.div>
-                  <div className="hidden lg:flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={handleGenerate}
-                      disabled={loading || humanizing || !config.input}
-                      aria-busy={loading}
-                      aria-controls="reply-output"
-                      className="group inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium rounded-full border border-white/15 text-[var(--foreground)] hover:text-black hover:bg-[var(--accent)]/90 hover:border-[var(--accent)]/60 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <span className="inline-flex items-center">
-                        {loading ? (
-                          <span>
-                            Generating<span className="loading-dots" aria-hidden="true"></span>
-                          </span>
-                        ) : (
-                          <>
-                            Generate
-                            <svg className="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                          </>
-                        )}
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleHumanize}
-                      disabled={humanizing || loading || !output}
-                      aria-busy={humanizing}
-                      className="px-5 py-2.5 text-sm rounded-full border border-white/15 hover:border-[var(--accent)]/60 hover:bg-white/5 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-300 hover:text-neutral-100"
-                    >
-                      {humanizing ? (
-                        <span>
-                          Humanizing<span className="loading-dots" aria-hidden="true"></span>
-                        </span>
-                      ) : (
-                        "Humanize"
-                      )}
-                    </button>
-                  </div>
-                </div>
+                <h2 className="font-semibold text-neutral-100 text-[clamp(1.75rem,4.8vw,2.25rem)] mb-2">
+                  Start creating
+                </h2>
+                <p className="text-neutral-400 max-w-2xl text-[clamp(0.95rem,2.6vw,1.125rem)]">
+                  Configure your preferences and generate context-aware text that matches your style
+                </p>
               </motion.div>
 
-              {/* Content grid; panes scroll independently */}
-              <div className="flex-1 min-h-0 py-6 lg:py-8 grid gap-6 lg:gap-8 lg:grid-cols-2">
-
-                <div className="min-h-0 overflow-auto pr-1">
+              {/* Content grid; single scroll container, wider columns */}
+              <div className="flex-1 min-h-0 py-6 lg:py-8 grid gap-6 lg:gap-8 lg:[grid-template-columns:1.25fr_1fr]">
 
             <motion.section
               initial={{ opacity: 0, x: -30 }}
@@ -345,9 +294,7 @@ export default function Home() {
                 </div>
               </motion.div>
             </motion.section>
-                </div>
 
-                <div className="min-h-0 overflow-auto pl-1">
             <motion.section
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -445,7 +392,6 @@ export default function Home() {
                 </motion.section>
               )}
             </motion.section>
-                </div>
               </div>
             </div>
           </main>
