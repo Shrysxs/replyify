@@ -6,6 +6,56 @@
   --accent: #00CFFF;     /* bright cyan */
 }
 
+/* How It Works: faint illustrations per column */
+.feature-illustration {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 52%;
+  pointer-events: none;
+  opacity: 0.55;
+  filter: blur(0.2px) saturate(0.9);
+}
+
+/* Illustration 1: curved arc + diagonal shard (abstract pen stroke) */
+.feature-illustration-1 {
+  background:
+    radial-gradient(80% 120% at 30% 100%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 62%) ,
+    linear-gradient(35deg, rgba(255,255,255,0) 45%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0) 55%);
+  mask: linear-gradient(to top, black 0%, transparent 100%);
+}
+
+/* Illustration 2: browser frame lines */
+.feature-illustration-2 {
+  --c: rgba(255,255,255,0.08);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 100% 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / 2px 100% no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 100% 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 2px 100% no-repeat,
+    linear-gradient(to right, rgba(255,255,255,0.10), rgba(255,255,255,0.0)) top 10% left 0 / 40% 2px no-repeat;
+  border-radius: 6px;
+  transform: translateY(10%);
+  mask: linear-gradient(to top, black 0%, transparent 100%);
+}
+
+/* Illustration 3: stacked cards */
+.feature-illustration-3 {
+  --c: rgba(255,255,255,0.08);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 100% 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / 2px 100% no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 100% 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 2px 100% no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom 18% left 6% / 88% 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom 30% left 12% / 76% 2px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom 42% left 18% / 64% 2px no-repeat;
+  border-radius: 8px;
+  transform: translateY(6%);
+  mask: linear-gradient(to top, black 0%, transparent 100%);
+}
+
 /* Hero beam (right-side light cone) */
 .hero-beam {
   position: absolute;
