@@ -389,9 +389,6 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Bottom radial glow behind footer */}
-      <div className="footer-bottom-glow" aria-hidden />
-
       {/* Footer */}
       <Footer />
     </div>

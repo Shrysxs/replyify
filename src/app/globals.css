@@ -6,6 +6,39 @@
   --accent: #00CFFF;     /* bright cyan */
 }
 
+/* Local footer glow placed inside the footer element */
+.footer-radial-glow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 62%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  /* Layered glows: warm orange core + cool desaturated halo for x.ai-like look */
+  background-image:
+    radial-gradient(70% 140% at 50% 100%,
+      rgba(255, 122, 26, 0.42) 0%,
+      rgba(255, 122, 26, 0.26) 22%,
+      rgba(255, 122, 26, 0.14) 40%,
+      rgba(255, 122, 26, 0.06) 52%,
+      rgba(255, 122, 26, 0.00) 64%
+    ),
+    radial-gradient(85% 160% at 50% 100%,
+      rgba(64, 98, 120, 0.28) 0%,
+      rgba(64, 98, 120, 0.16) 30%,
+      rgba(64, 98, 120, 0.06) 52%,
+      rgba(64, 98, 120, 0.00) 70%
+    );
+  filter: blur(14px);
+}
+
+@media (min-width: 640px) {
+  .footer-radial-glow { height: 66%; }
+}
+@media (min-width: 1024px) {
+  .footer-radial-glow { height: 70%; }
+}
 /* Removed unsupported @theme block; using CSS variables in :root instead */
 
 /* Base */

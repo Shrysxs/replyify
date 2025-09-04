@@ -6,6 +6,8 @@ export default function Footer() {
     <footer className="relative py-10 px-4 sm:px-6 lg:px-8 border-t border-white/10">
       {/* subtle gradient from transparent to slightly darker */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-transparent to-[#0F0F0F] opacity-80" />
+      {/* footer radial glow anchored to bottom (x.ai-style) */}
+      <div aria-hidden className="footer-radial-glow" />
       <div className="relative max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
