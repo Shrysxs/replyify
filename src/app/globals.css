@@ -6,6 +6,22 @@
   --accent: #00CFFF;     /* bright cyan */
 }
 
+/* Scroll snapping for full-screen sections */
+.snap-container {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Inner scroll area constrained to viewport height */
+.viewport-scroll {
+  max-height: 100vh;
+  overflow: auto;
+}
+
 /* How It Works: faint illustrations per column */
 .feature-illustration {
   position: absolute;

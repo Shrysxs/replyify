@@ -140,7 +140,7 @@ export default function Home() {
     }
   }
 
-  const appRef = React.useRef<HTMLDivElement>(null);
+  const appRef = React.useRef<HTMLElement>(null);
 
   const scrollToApp = () => {
     appRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -156,7 +156,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="snap-container h-screen overflow-y-auto">
       <AnimatedBackground />
       
       {/* Navigation */}
@@ -209,20 +209,24 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <HeroSection onStartWriting={scrollToApp} />
+      <section className="snap-section h-screen">
+        <HeroSection onStartWriting={scrollToApp} />
+      </section>
       
       {/* How It Works Section */}
-      <HowItWorksSection />
+      <section className="snap-section h-screen">
+        <HowItWorksSection />
+      </section>
 
-      {/* Main App Section */}
-      <main ref={appRef} className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+      {/* Main App Section (snapped, internally scrollable) */}
+      <section ref={appRef} className="snap-section h-screen">
+        <div className="viewport-scroll">
+          <main className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
           >
             <h2 className="font-semibold text-neutral-100 mb-3 text-[clamp(1.75rem,4.8vw,2.25rem)]">
               Start creating
@@ -386,11 +390,13 @@ export default function Home() {
               )}
             </motion.section>
           </div>
-        </div>
-      </main>
+            </div>
+          </main>
 
-      {/* Footer */}
-      <Footer />
+          {/* Footer inside scrollable area */}
+          <Footer />
+        </div>
+      </section>
     </div>
   );
 }

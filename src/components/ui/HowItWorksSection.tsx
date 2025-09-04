@@ -36,8 +36,8 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-24 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <section className="h-full min-h-0 overflow-hidden px-4 sm:px-6 lg:px-8 flex">
+      <div className="max-w-6xl mx-auto w-full flex flex-col py-20 sm:py-24 lg:py-28">
         {/* Section Header (left-aligned like reference) */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
