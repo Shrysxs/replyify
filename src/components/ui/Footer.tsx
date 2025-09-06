@@ -3,31 +3,31 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="relative py-10 px-4 sm:px-6 lg:px-8 border-t border-white/10">
-      {/* subtle gradient from transparent to slightly darker */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-transparent to-[#0F0F0F] opacity-80" />
+    <footer className="relative py-16 px-4 sm:px-6 lg:px-8 border-t border-white/8 mt-16">
+      {/* Enhanced gradient overlay */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-transparent via-[#0A0A0A]/60 to-[#0A0A0A] opacity-90" />
       {/* footer radial glow anchored to bottom (x.ai-style) */}
       <div aria-hidden className="footer-radial-glow" />
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-col sm:flex-row items-center justify-between gap-4"
+          className="flex flex-col sm:flex-row items-center justify-between gap-6"
         >
           {/* Left: Copyright */}
-          <div className="text-sm text-neutral-500">
+          <div className="text-sm text-neutral-500 font-medium">
             © {new Date().getFullYear()} Replyify. All rights reserved.
           </div>
 
           {/* Right: Builder + GitHub */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-6">
             <a
               href="https://x.com/Shrysxs"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[var(--accent)] hover:opacity-90 transition-opacity"
+              className="text-sm text-[var(--accent)] hover:text-[var(--accent)]/80 transition-colors font-medium"
             >
               Built by Shrysxs
             </a>
@@ -35,7 +35,7 @@ export default function Footer() {
               href="https://github.com/Shrysxs"
               target="_blank"
               rel="noopener noreferrer"
-              className="group text-neutral-400 hover:text-[var(--accent)] transition-colors"
+              className="group text-neutral-400 hover:text-[var(--accent)] transition-colors p-2 rounded-full hover:bg-white/5"
               aria-label="GitHub"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

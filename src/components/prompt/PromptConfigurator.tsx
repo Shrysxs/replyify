@@ -60,7 +60,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
         viewport={{ once: true }}
-        className="space-y-3"
+        className="space-y-4"
       >
         <div id="msg-label" className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
           Your thoughts or ideas
@@ -72,10 +72,10 @@ export default function PromptConfigurator({ value, onChange }: Props) {
             placeholder="Write what's on your mind or what you want to convey…"
             aria-label="Your thoughts or ideas to transform"
             aria-describedby="msg-label"
-            className="w-full min-h-[160px] border border-white/15 bg-transparent p-4 rounded-xl outline-none focus:ring-2 focus:ring-[var(--accent)]/30 transition-colors duration-200 text-neutral-200 placeholder:text-neutral-500 resize-none"
+            className="w-full min-h-[180px] border border-white/8 bg-white/[0.02] backdrop-blur-sm p-6 rounded-2xl outline-none focus:ring-2 focus:ring-[var(--accent)]/30 focus:border-[var(--accent)]/20 transition-all duration-200 text-neutral-200 placeholder:text-neutral-500 resize-none hover:border-white/12"
           />
           {value.input && (
-            <div className="absolute bottom-3 right-3 text-xs text-neutral-500 font-mono">
+            <div className="absolute bottom-4 right-4 text-xs text-neutral-500 font-mono bg-black/20 px-2 py-1 rounded-md backdrop-blur-sm">
               {value.input.length} chars
             </div>
           )}

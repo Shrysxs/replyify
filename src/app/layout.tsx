@@ -67,15 +67,15 @@ export default function RootLayout({
         <link rel="preconnect" href="https://api.groq.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//api.groq.com" />
       </head>
-      <body className={`${inter.variable} ${jetbrains.variable} antialiased min-h-screen w-full relative overflow-x-hidden`}>
-        {/* Subtle vignette backdrop */}
+      <body className={`${inter.variable} ${jetbrains.variable} antialiased min-h-screen w-full relative overflow-x-hidden gpu-accelerated`}>
+        {/* Enhanced vignette backdrop */}
         <div
-          className="fixed inset-0 z-0 pointer-events-none"
+          className="fixed inset-0 z-0 pointer-events-none will-change-opacity"
           aria-hidden="true"
           style={{
-            background: `radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,0.06), transparent 60%),
-                         radial-gradient(900px 400px at 20% -10%, rgba(0,207,255,0.08), transparent 55%),
-                         linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(15,15,15,0.6) 90%)`,
+            background: `radial-gradient(1400px 700px at 75% -5%, rgba(255,255,255,0.04), transparent 65%),
+                         radial-gradient(1000px 500px at 25% -5%, rgba(0,212,255,0.06), transparent 60%),
+                         linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,10,10,0.8) 95%)`,
           }}
         />
         {/* App Content */}
