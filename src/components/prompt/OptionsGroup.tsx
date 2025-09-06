@@ -13,8 +13,8 @@ type Props = {
 export default function OptionsGroup({ title, options, value, onChange }: Props) {
   return (
     <div className="space-y-4">
-      <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium mb-1">{title}</div>
-      <div className="flex flex-wrap gap-2 sm:gap-3 md:flex-nowrap md:overflow-x-auto md:gap-2 md:-mx-1 md:px-1 md:[&>*]:flex-shrink-0 hide-scrollbar">
+      <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium mb-1 text-responsive">{title}</div>
+      <div className="flex flex-wrap gap-2 sm:gap-3 lg:flex-nowrap lg:overflow-x-auto lg:gap-2 lg:-mx-1 lg:px-1 lg:[&>*]:flex-shrink-0 hide-scrollbar">
         {options.map((opt, index) => {
           const isSelected = value === opt;
           return (

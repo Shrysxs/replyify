@@ -161,7 +161,7 @@ export default function Home() {
       
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "backdrop-blur-xl bg-black/40 border-b border-white/8" : "bg-transparent border-b border-transparent"}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-responsive">
           <div className="flex items-center justify-between h-16">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -178,7 +178,7 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.05 }}
                 onClick={scrollToApp}
-                className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium rounded-full border border-white/12 text-neutral-200 hover:text-black hover:bg-[var(--accent)] hover:border-[var(--accent)] transition-all duration-200 will-change-transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--accent)]/20"
+                className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium rounded-full border border-white/12 text-neutral-200 hover:text-black hover:bg-[var(--accent)] hover:border-[var(--accent)] transition-all duration-200 will-change-transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--accent)]/20 text-responsive"
               >
                 Try Replyify
               </motion.button>
@@ -222,8 +222,8 @@ export default function Home() {
       {/* Main App Section (snapped, internally scrollable) */}
       <section ref={appRef} className="snap-section h-screen">
         <div className="viewport-scroll">
-          <main className="relative px-4 sm:px-6 lg:px-8 pt-20">
-            <div className="max-w-6xl mx-auto flex flex-col min-h-0">
+          <main className="relative pt-20">
+            <div className="container-responsive flex flex-col min-h-0">
               {/* Enhanced header */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
@@ -240,7 +240,7 @@ export default function Home() {
               </motion.div>
 
               {/* Enhanced layout with better spacing */}
-              <div className="flex-1 min-h-0 pb-8 max-w-5xl mx-auto w-full">
+              <div className="flex-1 min-h-0 pb-8 w-full max-w-5xl mx-auto">
             <motion.section
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}

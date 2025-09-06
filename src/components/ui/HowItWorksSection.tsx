@@ -36,8 +36,8 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section className="h-full min-h-0 overflow-hidden px-4 sm:px-6 lg:px-8 flex items-center">
-      <div className="max-w-7xl mx-auto w-full flex flex-col py-20 sm:py-24 lg:py-28">
+    <section className="h-full min-h-0 overflow-hidden flex items-center">
+      <div className="container-responsive w-full flex flex-col py-20 sm:py-24 lg:py-28">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -55,7 +55,7 @@ export default function HowItWorksSection() {
         </motion.div>
 
         {/* Feature Columns with enhanced styling */}
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
           {/* Connecting lines for desktop */}
           <div aria-hidden className="hidden md:block absolute top-16 left-1/6 right-1/6 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -69,7 +69,7 @@ export default function HowItWorksSection() {
               className="relative group"
             >
               {/* Card content with glassmorphism */}
-              <div className="relative p-8 rounded-2xl border border-white/8 bg-white/[0.02] backdrop-blur-sm hover:bg-white/[0.04] hover:border-white/12 transition-all duration-300">
+              <div className="relative p-6 sm:p-8 rounded-2xl border border-white/8 bg-white/[0.02] backdrop-blur-sm hover:bg-white/[0.04] hover:border-white/12 transition-all duration-300">
                 {/* Step number with icon */}
                 <div className="flex flex-col items-center text-center mb-6">
                   <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] mb-4 group-hover:bg-[var(--accent)]/15 transition-colors duration-300">
@@ -81,12 +81,12 @@ export default function HowItWorksSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-semibold text-neutral-100 mb-3 text-center">
+                <h3 className="text-lg sm:text-xl font-semibold text-neutral-100 mb-3 text-center text-responsive">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-neutral-400 leading-relaxed text-center">
+                <p className="text-sm text-neutral-400 leading-relaxed text-center text-responsive">
                   {step.description}
                 </p>
 

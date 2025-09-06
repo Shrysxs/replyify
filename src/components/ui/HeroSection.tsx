@@ -7,14 +7,14 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onStartWriting }: HeroSectionProps) {
   return (
-    <section className="relative h-full min-h-0 overflow-hidden px-4 sm:px-6 lg:px-8 flex items-center touch-pan-y">
+    <section className="relative h-full min-h-0 overflow-hidden flex items-center touch-pan-y">
       {/* Right-side light beam background */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         <div className="hero-beam" />
         <div className="hero-vignette" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl w-full pt-16">
+      <div className="relative z-10 container-responsive w-full pt-16">
         {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -25,14 +25,14 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
           [ WRITE WITH CONTEXT ]
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left: Headline + CTA */}
           <div className="lg:col-span-7 xl:col-span-6">
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="text-display text-neutral-100 mb-6"
+              className="text-display text-neutral-100 mb-6 text-responsive"
             >
               Craft concise,
               <span className="block text-neutral-400">on‑brand writing</span>
@@ -42,7 +42,7 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-body text-neutral-300 max-w-lg mb-8 leading-relaxed"
+              className="text-body text-neutral-300 max-w-lg mb-8 leading-relaxed text-responsive"
             >
               Transform scattered thoughts into polished, context-aware text. Set your persona, tone, and goals — get tailored content instantly.
             </motion.p>
@@ -51,11 +51,11 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
             >
               <button
                 onClick={onStartWriting}
-                className="group inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-full bg-[var(--accent)] text-black hover:bg-[var(--accent)]/90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/40 will-change-transform hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--accent)]/25"
+                className="group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium rounded-full bg-[var(--accent)] text-black hover:bg-[var(--accent)]/90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/40 will-change-transform hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--accent)]/25 w-full sm:w-auto text-responsive"
               >
                 Start writing
                 <svg
@@ -70,7 +70,7 @@ export default function HeroSection({ onStartWriting }: HeroSectionProps) {
 
               <button
                 onClick={onStartWriting}
-                className="inline-flex items-center justify-center rounded-full border border-white/12 px-6 py-4 text-base text-neutral-200 hover:bg-white/5 hover:border-white/20 transition-all duration-200 group"
+                className="inline-flex items-center justify-center rounded-full border border-white/12 px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-neutral-200 hover:bg-white/5 hover:border-white/20 transition-all duration-200 group w-full sm:w-auto text-responsive"
               >
                 See how it works
                 <svg className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
