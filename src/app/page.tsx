@@ -19,7 +19,7 @@ export default function Home() {
   });
   const [loading, setLoading] = React.useState(false);
   const [humanizing, setHumanizing] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
+  const [, setError] = React.useState<string | null>(null);
   const [output, setOutput] = React.useState<string>("");
   const controllerRef = React.useRef<AbortController | null>(null);
   const [copied, setCopied] = React.useState(false);
@@ -267,7 +267,7 @@ export default function Home() {
                   </label>
                   <div className="tooltip text-xs text-neutral-400">
                     <span className="underline decoration-dotted cursor-help hover:text-[var(--accent)] transition-colors">
-                      What's this?
+                      What&apos;s this?
                     </span>
                     <span className="tooltip-content">
                       0.0-0.3: Conservative, predictable | 0.4-0.6: Balanced | 0.7-1.0: Creative, varied, spontaneous
