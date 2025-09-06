@@ -12,7 +12,7 @@ type Props = {
 export default function PromptConfigurator({ value, onChange }: Props) {
   
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ export default function PromptConfigurator({ value, onChange }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
         viewport={{ once: true }}
-        className="space-y-4"
+        className="space-y-6"
       >
         <div id="msg-label" className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
           Your thoughts or ideas

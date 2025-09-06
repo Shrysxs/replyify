@@ -229,7 +229,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="pt-8 pb-12 text-center"
+                className="pt-12 pb-16 text-center"
               >
                 <h2 className="text-heading text-neutral-100 mb-4">
                   Start creating
@@ -246,7 +246,7 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="space-y-6 mb-8"
+              className="space-y-8 mb-12"
             >
               <PromptConfigurator
                 value={config}
@@ -259,9 +259,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="rounded-2xl p-6 border border-white/8 bg-white/[0.02] backdrop-blur-sm"
+                className="rounded-2xl p-8 border border-white/8 bg-white/[0.02] backdrop-blur-sm"
               >
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-8">
                   <label htmlFor="temp" className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
                     Creativity Level
                   </label>
