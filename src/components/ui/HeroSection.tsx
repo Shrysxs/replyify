@@ -7,7 +7,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onStartWriting }: HeroSectionProps) {
   return (
-    <section className="relative h-full min-h-0 overflow-hidden px-4 sm:px-6 lg:px-8 flex items-center">
+    <section className="relative h-full min-h-0 overflow-hidden px-4 sm:px-6 lg:px-8 flex items-center touch-pan-y">
       {/* Right-side light beam background */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         <div className="hero-beam" />

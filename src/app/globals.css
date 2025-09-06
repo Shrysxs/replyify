@@ -27,6 +27,8 @@
 .viewport-scroll {
   max-height: 100vh;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 /* How It Works: faint illustrations per column */
@@ -170,6 +172,7 @@
 /* Base */
 html, body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -182,6 +185,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 /* Links & focus */
@@ -449,6 +454,36 @@ input[type="range"].glow-range::-moz-range-thumb {
   .text-heading {
     font-size: clamp(1.5rem, 6vw, 1.75rem);
     line-height: 1.25;
+  }
+  
+  /* Fix mobile scrolling issues */
+  body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Improve touch scrolling */
+  .viewport-scroll {
+    max-height: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Fix mobile viewport issues */
+  html {
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+  
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
   }
 }
 
