@@ -717,7 +717,7 @@ input[type="range"].glow-range::-moz-range-thumb {
   filter: drop-shadow(0 0 12px rgba(0,207,255,0.08));
 }
 
-/* Glassmorphism utilities - restored original */
+/* Enhanced Glassmorphism utilities */
 .glass {
   background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
   border: 1px solid rgba(255,255,255,0.18);
@@ -725,6 +725,132 @@ input[type="range"].glow-range::-moz-range-thumb {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 14px;
+}
+
+/* Enhanced visual flow and spacing utilities */
+.section-spacing {
+  padding-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: clamp(3rem, 8vw, 6rem);
+}
+
+.content-spacing {
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.breathing-room {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* Improved visual hierarchy */
+.visual-hierarchy-1 {
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.visual-hierarchy-2 {
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.visual-hierarchy-3 {
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+/* Enhanced container spacing for better flow */
+.container-flow {
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+
+/* Smooth transitions for all interactive elements */
+.smooth-interaction {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity, background-color, border-color;
+}
+
+/* Enhanced focus states for accessibility */
+.focus-enhanced:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 207, 255, 0.1);
+}
+
+/* Improved card hover effects */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 207, 255, 0.1);
+}
+
+/* Enhanced text readability */
+.text-enhanced {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+}
+
+/* Improved button interactions */
+.button-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.button-enhanced:hover::before {
+  left: 100%;
+}
+
+/* Enhanced scroll behavior */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+/* Improved spacing for mobile devices */
+@media (max-width: 768px) {
+  .mobile-spacing {
+    padding-left: clamp(1rem, 5vw, 1.5rem);
+    padding-right: clamp(1rem, 5vw, 1.5rem);
+  }
+  
+  .mobile-content-spacing {
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  }
+}
+
+/* Enhanced animation performance */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Improved loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.0) 0%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    rgba(255, 255, 255, 0.0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 /* Performance optimizations */
